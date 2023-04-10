@@ -1,0 +1,179 @@
+﻿@model IEnumerable<App.DAL.Models.TblGalleryPhoto>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+@section scripts{
+    <script src="~/Scripts/Gallery/GalleryPhotoIndex.js"></script>
+}
+
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+
+
+
+    @*<table class="table">
+    <thead>
+    <tr>
+    <th>
+    @Html.DisplayNameFor(model => model.Name)
+    </th>
+    <th>
+    @Html.DisplayNameFor(model => model.Image)
+    </th>
+    <th>
+    @Html.DisplayNameFor(model => model.Flag)
+    </th>
+    <th>
+    @Html.DisplayNameFor(model => model.IsDelete)
+    </th>
+    <th>
+    @Html.DisplayNameFor(model => model.Details)
+    </th>
+    <th>
+    @Html.DisplayNameFor(model => model.CreatedDate)
+    </th>
+    <th>
+    @Html.DisplayNameFor(model => model.CreatedBy)
+    </th>
+    <th>
+    @Html.DisplayNameFor(model => model.UpdatedDate)
+    </th>
+    <th>
+    @Html.DisplayNameFor(model => model.UpdatedBy)
+    </th>
+    <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+    <tr>
+    <td>
+    @Html.DisplayFor(modelItem => item.Name)
+    </td>
+    <td>
+    @Html.DisplayFor(modelItem => item.Image)
+    </td>
+    <td>
+    @Html.DisplayFor(modelItem => item.Flag)
+    </td>
+    <td>
+    @Html.DisplayFor(modelItem => item.IsDelete)
+    </td>
+    <td>
+    @Html.DisplayFor(modelItem => item.Details)
+    </td>
+    <td>
+    @Html.DisplayFor(modelItem => item.CreatedDate)
+    </td>
+    <td>
+    @Html.DisplayFor(modelItem => item.CreatedBy)
+    </td>
+    <td>
+    @Html.DisplayFor(modelItem => item.UpdatedDate)
+    </td>
+    <td>
+    @Html.DisplayFor(modelItem => item.UpdatedBy)
+    </td>
+    <td>
+    <a asp-action="Edit" asp-route-id="@item.ImageId">Edit</a> |
+    <a asp-action="Details" asp-route-id="@item.ImageId">Details</a> |
+    <a asp-action="Delete" asp-route-id="@item.ImageId">Delete</a>
+    </td>
+    </tr>
+    }
+    </tbody>
+    </table>*@
+
+
+
+
+    <div class="box-content">
+
+        <div class="box-heading">
+            <div class="box-title">
+                <h3 class="mb-35">Gallery Photos</h3>
+            </div>
+            <div class="box-breadcrumb">
+                <a class="btn btn-default" asp-controller="Gallery" asp-action="CreateGalleryPhoto">Add Photo</a>
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-xl-12 col-12">
+                <div class="card-grid-2 hover-up">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <div class="box-padding">
+                                <div class="row display-list">
+                                    <div class="table-responsive">
+                                        <table id="photoList" class="stripe row-border">
+                                            <thead align="center">
+                                                <tr>
+                                                    <th>
+                                                        Name
+                                                    </th>
+
+                                                    <th>
+                                                        Category
+                                                    </th>
+                                                    <th>
+                                                        Details
+                                                    </th>
+                                                    <th>
+                                                        Image
+                                                    </th>
+                                                    <th>
+                                                        Action
+                                                    </th>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            @foreach (var item in Model)
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        <p class="color-text-paragraph font-sm" align="justify">@Html.DisplayFor(modelItem => item.Name)</p>
+                                                    </td>
+                                                    <td>
+                                                        <p class="color-text-paragraph font-sm" align="justify"> @Html.DisplayFor(modelItem => item.Flag)</p>
+                                                    </td>
+
+                                                    <td>
+                                                        <p class="color-text-paragraph font-sm" align="justify">@Html.DisplayFor(modelItem => item.Details)</p>
+                                                    </td>
+                                                    <td>
+
+                                                        <p>&nbsp;</p><img src="@item.Image" style="display: block;" />
+
+                                                    </td>
+                                                    <td>
+                                                        <a asp-action="EditGalleryPhoto" class="" asp-route-id="@item.ImageId"><i class='fas fa-edit' style='font-size:25px;color:black'></i></a> |
+                                                        <a onclick="btnDelete(@item.ImageId)"><i class='fas fa-trash-alt' style='font-size:25px;color:red'></i></a>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<link href="~/customcss.css" rel="stylesheet" />
+
+
+
+
+

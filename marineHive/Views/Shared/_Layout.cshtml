@@ -1,0 +1,544 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="msapplication-TileColor" content="#0E0E0E">
+    <meta name="template-color" content="#0E0E0E">
+    @*<link rel="manifest" href="manifest.json" crossorigin>*@
+    <meta name="msapplication-config" content="browserconfig.xml">
+    <meta name="description" content="Index page">
+    <meta name="keywords" content="index, page">
+    <meta name="author" content="">
+    <script src="~/frontend/assets/js/vendor/jquery-3.6.0.min.js"></script>
+
+    <link rel="shortcut icon" type="image/x-icon" href="~/frontend/assets/imgs/template/favicon.svg">
+    <link href="~/frontend/assets/css/style.css?version=4.1" rel="stylesheet">
+    <link href="~/customcss.css" rel="stylesheet" />
+
+    <title>@ViewData["Title"] | MARINE HIVE LTD </title>
+</head>
+<body>
+    <div id="preloader-active">
+        <div class="preloader d-flex align-items-center justify-content-center">
+            <div class="preloader-inner position-relative">
+                <div class="text-center"><img src="~/frontend/assets/imgs/template/loading.gif" alt="Loading"></div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="ModalApplyJobForm" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content apply-job-form">
+                <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="modal-body pl-30 pr-30 pt-50">
+                    <div class="text-center">
+                        <p class="font-sm text-brand-2">Job Application </p>
+                        <h2 class="mt-10 mb-5 text-brand-1 text-capitalize">Start your career today</h2>
+                        <p class="font-sm text-muted mb-30">Please fill in your information and send it to the employer.                   </p>
+                    </div>
+                    <form class="login-register text-start mt-20 pb-30" action="#">
+                        <div class="form-group">
+                            <label class="form-label" for="input-1">Full Name *</label>
+                            <input class="form-control" id="input-1" type="text" required="" name="fullname" placeholder="Steven Job">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="input-2">Email *</label>
+                            <input class="form-control" id="input-2" type="email" required="" name="emailaddress" placeholder="stevenjob@gmail.com">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="number">Contact Number *</label>
+                            <input class="form-control" id="number" type="text" required="" name="phone" placeholder="(+01) 234 567 89">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="des">Description</label>
+                            <input class="form-control" id="des" type="text" required="" name="Description" placeholder="Your description...">
+                        </div>
+                        <div class="fsorm-group">
+                            <label class="form-label" for="file">Upload Resume</label>
+                            <input class="form-control" id="file" name="resume" type="file">
+                        </div>
+                        <div class="login_footer form-group d-flex justify-content-between">
+                            <label class="cb-container">
+                                <input type="checkbox"><span class="text-small">Agree our terms and policy</span><span class="checkmark"></span>
+                            </label><a class="text-muted" href="page-contact.html">Lean more</a>
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-default hover-up w-100" type="submit" name="login">Apply Job</button>
+                        </div>
+                        <div class="text-muted text-center">Do you need support? <a href="page-contact.html">Contact Us</a></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <header class="header">
+        <div class="container">
+            <div class="main-header">
+                <div class="header-logo">
+                    <a class="d-flex" asp-controller="Home" asp-action="Index">
+                        <img alt="MarineHive" src="~/frontend/assets/marine-logo.png" width="400" height="70">
+                    </a>
+                </div>
+                <div class="header-left">
+                </div>
+                <div class="header-nav">
+                    <nav class="nav-main-menu">
+                        <div class="block-signin">
+                            <a class="btn btn-outline-dark hover-up" asp-controller="Login" asp-action="RegisterCrew">Crew Register</a> |
+                            <a class="btn btn-dark hover-up" asp-controller="Login" asp-action="RegisterCompany">Company Register</a>
+                            @*<a class="btn btn-default btn-shadow ml-40 hover-up" asp-controller="Login" asp-action="Login" asp-route-returnUrl="@Context.Request.Path">Sign in</a>*@
+                        </div>
+                    </nav>
+                </div>
+                <div class="header-right">
+                    <div class="header-logo"><a class="d-flex" asp-controller="Home" asp-action="Index"><img alt="MarineHive" src="~/frontend/assets/LR logo.jpg" width="200" height="60"></a></div>
+
+                </div>
+            </div>
+        </div>
+    </header>
+    <header class="header sticky-bar">
+        <div class="container">
+            <div class="main-header">
+                <div class="header-left">
+                    @*<div class="header-logo">
+                    <a class="d-flex" asp-controller="Home" asp-action="Index">
+                    <img alt="MarineHive" src="~/frontend/assets/marine-logo.png" width="200" height="30">
+                    </a>
+                    </div>*@
+                </div>
+                <div class="header-nav">
+                    <nav class="nav-main-menu">
+                        <ul class="main-menu">
+                            <li>
+                                <a asp-controller="Home" asp-action="Index">Home</a>
+
+                            </li>
+                            @*<li>
+                            <a class="outline" asp-controller="Job" asp-action="Index">Jobs</a>
+                            </li>*@
+                            <li class="has-children">
+                                <a>Our Services</a>
+                                <ul class="sub-menu">
+                                    <li><a asp-controller="Home" asp-action="CrewManning">Crew Manning & Management</a></li>
+                                    <li><a asp-controller="Home" asp-action="PortAgency">Port Agency</a></li>
+                                    <li><a asp-controller="Home" asp-action="TechServices">Technical Services</a></li>
+                                    <li><a asp-controller="Home" asp-action="ShipManagement">Ship Management</a></li>
+                                </ul>
+                            </li>
+                            @*<li class="has-children">
+                            <a href="companies-grid.html">Recruiters</a>
+                            <ul class="sub-menu">
+                            <li><a href="companies-grid.html">Recruiters</a></li>
+                            <li><a href="company-details.html">Company Details</a></li>
+                            </ul>
+                            </li>*@
+                            <li>
+                                <a asp-controller="Home" asp-action="BoardOfDirectors">Board of Directors</a>
+                            </li>
+                            @* <li class="has-children">
+                            <a href="blog-grid.html">Crew Trainign</a>
+                            <ul class="sub-menu">
+                            <li><a href="page-about.html">About Us</a></li>
+                            <li><a href="page-pricing.html">Pricing Plan</a></li>
+                            <li><a href="page-contact.html">Contact Us</a></li>
+                            <li><a href="page-register.html">Register</a></li>
+                            <li><a href="page-signin.html">Signin</a></li>
+                            <li><a href="page-reset-password.html">Reset Password</a></li>
+                            <li><a href="page-content-protected.html">Content Protected</a></li>
+                            </ul>
+                            </li>*@
+                            <li>
+                                <a asp-controller="Home" asp-action="CrewTraining">Crew Training</a>
+                            </li>
+                            @* <li>
+                            <a asp-area="" asp-controller="Home" asp-action="Career">Career</a>
+                            </li>*@
+                            <li>
+                                <a asp-controller="Home" asp-action="Gallery">Gallery</a>
+                            </li>
+
+                            <li>
+                                <a asp-area="" asp-controller="Home" asp-action="ContactUs">Contact Us</a>
+                            </li>
+                            <li class="has-children">
+                                <a asp-area="" asp-controller="Home" asp-action="AboutUs">About Us</a>
+                                <ul class="sub-menu">
+                                    <li><a asp-controller="Home" asp-action="AboutUs">Our Profile</a></li>
+                                    <li><a asp-controller="Home" asp-action="MissionVision">Mission & Vission</a></li>
+                                    <li><a asp-controller="Home" asp-action="CoreValues">Core Values</a></li>
+                                    <li><a asp-controller="Home" asp-action="PrivacyStatement">Privacy Statement</a></li>
+                                    <li><a asp-controller="Home" asp-action="WhyBDCrew">Why BD Crew</a></li>
+
+                                </ul>
+                            </li>
+                            @* <li class="dashboard">
+                            <a asp-area="" asp-controller="Dashboard" asp-action="DashBoardIndex">Dashboard</a>
+
+                            </li>*@
+                        </ul>
+                    </nav>
+                    <div class="burger-icon burger-icon-white"><span class="burger-icon-top"></span><span class="burger-icon-mid"></span><span class="burger-icon-bottom"></span></div>
+                </div>
+                <div class="header-right">
+                    <div class="block-signin">
+                        @*<a class="text-link-bd-btom hover-up" asp-controller="Login" asp-action="Register">Register</a>*@
+
+                        <a class="btn btn-default btn-shadow ml-40 hover-up" asp-controller="Login" asp-action="Login" asp-route-returnUrl="@Context.Request.Path">Sign in</a>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </header>
+    <div class="mobile-header-active mobile-header-wrapper-style perfect-scrollbar">
+        <div class="mobile-header-wrapper-inner">
+            <div class="mobile-header-content-area">
+                <div class="perfect-scroll">
+                    <div class="mobile-search mobile-header-border mb-30">
+                        <form action="#">
+                            <input type="text" placeholder="Search…"><i class="fi-rr-search"></i>
+                        </form>
+                    </div>
+                    <div class="mobile-menu-wrap mobile-header-border">
+                        <!-- mobile menu start-->
+                        <nav>
+                            <ul class="mobile-menu font-heading">
+                                <li class="has-children">
+                                    <a class="active" href="index.html">Home</a>
+                                    <ul class="sub-menu">
+                                        <li><a href="index.html">Home 1</a></li>
+                                        <li><a href="index-2.html">Home 2</a></li>
+                                        <li><a href="index-3.html">Home 3</a></li>
+                                        <li><a href="index-4.html">Home 4</a></li>
+                                        <li><a href="index-5.html">Home 5</a></li>
+                                        <li><a href="index-6.html">Home 6</a></li>
+                                    </ul>
+                                </li>
+                                <li class="has-children">
+                                    <a href="jobs-grid.html">Find a Job</a>
+                                    <ul class="sub-menu">
+                                        <li><a href="jobs-grid.html">Jobs Grid</a></li>
+                                        <li><a href="jobs-list.html">Jobs List</a></li>
+                                        <li><a href="job-details.html">Jobs Details  </a></li>
+                                        <li><a href="job-details-2.html">Jobs Details 2              </a></li>
+                                    </ul>
+                                </li>
+                                <li class="has-children">
+                                    <a href="companies-grid.html">Recruiters</a>
+                                    <ul class="sub-menu">
+                                        <li><a href="companies-grid.html">Recruiters</a></li>
+                                        <li><a href="company-details.html">Company Details</a></li>
+                                    </ul>
+                                </li>
+                                <li class="has-children">
+                                    <a href="candidates-grid.html">Candidates</a>
+                                    <ul class="sub-menu">
+                                        <li><a href="candidates-grid.html">Candidates Grid</a></li>
+                                        <li><a href="candidate-details.html">Candidate Details</a></li>
+                                    </ul>
+                                </li>
+                                <li class="has-children">
+                                    <a href="blog-grid.html">Pages</a>
+                                    <ul class="sub-menu">
+                                        <li><a href="page-about.html">About Us</a></li>
+                                        <li><a href="page-pricing.html">Pricing Plan</a></li>
+                                        <li><a href="page-contact.html">Contact Us</a></li>
+                                        <li><a href="page-register.html">Register</a></li>
+                                        <li><a href="page-signin.html">Signin</a></li>
+                                        <li><a href="page-reset-password.html">Reset Password</a></li>
+                                        <li><a href="page-content-protected.html">Content Protected</a></li>
+                                    </ul>
+                                </li>
+                                <li class="has-children">
+                                    <a href="blog-grid.html">Blog</a>
+                                    <ul class="sub-menu">
+                                        <li><a href="blog-grid.html">Blog Grid</a></li>
+                                        <li><a href="blog-grid-2.html">Blog Grid 2</a></li>
+                                        <li><a href="blog-details.html">Blog Single</a></li>
+                                    </ul>
+                                </li>
+                                <li><a asp-controller="Dashboard" asp-action="DashBoardIndex">Dashboard</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="mobile-account">
+                        <h6 class="mb-10">Your Account</h6>
+                        <ul class="mobile-menu font-heading">
+                            <li><a href="#">Profile</a></li>
+                            <li><a href="#">Work Preferences</a></li>
+                            <li><a href="#">Account Settings</a></li>
+                            <li><a href="#">Go Pro</a></li>
+                            <li><a href="page-signin.html">Sign Out</a></li>
+                        </ul>
+                    </div>
+                    <div class="site-copyright">Copyright 2022 &copy; JobBox. <br>Designed by AliThemes.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mobile-header-active mobile-header-wrapper-style perfect-scrollbar">
+        <div class="mobile-header-wrapper-inner">
+            <div class="mobile-header-content-area">
+                <div class="perfect-scroll">
+                    <div class="mobile-search mobile-header-border mb-30">
+                        <form action="#">
+                            <input type="text" placeholder="Search…"><i class="fi-rr-search"></i>
+                        </form>
+                    </div>
+                    <div class="mobile-menu-wrap mobile-header-border">
+                        <!-- mobile menu start-->
+                        <nav>
+                            <ul class="mobile-menu font-heading">
+                                <li class="has-children">
+                                    <a class="active" href="index.html">Home</a>
+                                    <ul class="sub-menu">
+                                        <li><a href="index.html">Home 1</a></li>
+                                        <li><a href="index-2.html">Home 2</a></li>
+                                        <li><a href="index-3.html">Home 3</a></li>
+                                        <li><a href="index-4.html">Home 4</a></li>
+                                        <li><a href="index-5.html">Home 5</a></li>
+                                        <li><a href="index-6.html">Home 6</a></li>
+                                    </ul>
+                                </li>
+                                <li class="has-children">
+                                    <a href="jobs-grid.html">Find a Job</a>
+                                    <ul class="sub-menu">
+                                        <li><a href="jobs-grid.html">Jobs Grid</a></li>
+                                        <li><a href="jobs-list.html">Jobs List</a></li>
+                                        <li><a href="job-details.html">Jobs Details  </a></li>
+                                        <li><a href="job-details-2.html">Jobs Details 2              </a></li>
+                                    </ul>
+                                </li>
+                                <li class="has-children">
+                                    <a href="companies-grid.html">Recruiters</a>
+                                    <ul class="sub-menu">
+                                        <li><a href="companies-grid.html">Recruiters</a></li>
+                                        <li><a href="company-details.html">Company Details</a></li>
+                                    </ul>
+                                </li>
+                                <li class="has-children">
+                                    <a href="candidates-grid.html">Candidates</a>
+                                    <ul class="sub-menu">
+                                        <li><a href="candidates-grid.html">Candidates Grid</a></li>
+                                        <li><a href="candidate-details.html">Candidate Details</a></li>
+                                    </ul>
+                                </li>
+                                <li class="has-children">
+                                    <a href="blog-grid.html">Pages</a>
+                                    <ul class="sub-menu">
+                                        <li><a href="page-about.html">About Us</a></li>
+                                        <li><a href="page-pricing.html">Pricing Plan</a></li>
+                                        <li><a href="page-contact.html">Contact Us</a></li>
+                                        <li><a href="page-register.html">Register</a></li>
+                                        <li><a href="page-signin.html">Signin</a></li>
+                                        <li><a href="page-reset-password.html">Reset Password</a></li>
+                                        <li><a href="page-content-protected.html">Content Protected</a></li>
+                                    </ul>
+                                </li>
+                                <li class="has-children">
+                                    <a href="blog-grid.html">Blog</a>
+                                    <ul class="sub-menu">
+                                        <li><a href="blog-grid.html">Blog Grid</a></li>
+                                        <li><a href="blog-grid-2.html">Blog Grid 2</a></li>
+                                        <li><a href="blog-details.html">Blog Single</a></li>
+                                    </ul>
+                                </li>
+                                <li><a asp-controller="Dashboard" asp-action="DashBoardIndex">Dashboard</a></li>
+
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="mobile-account">
+                        <h6 class="mb-10">Your Account</h6>
+                        <ul class="mobile-menu font-heading">
+                            <li><a href="#">Profile</a></li>
+                            <li><a href="#">Work Preferences</a></li>
+                            <li><a href="#">Account Settings</a></li>
+                            <li><a href="#">Go Pro</a></li>
+                            <li><a href="page-signin.html">Sign Out</a></li>
+                        </ul>
+                    </div>
+                    <div class="site-copyright">Copyright 2022 &copy; JobBox. <br>Designed by AliThemes.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <main class="main">
+        @RenderBody()
+
+        <script src="~/frontend/assets/js/plugins/counterup.js"></script>
+    </main>
+
+    <footer class="footer mt-50">
+        <div class="container">
+            <div class="row">
+                <div class="footer-col-1 col-md-3 col-sm-12">
+                    <a href="index.html"><img alt="jobBox" src="~/frontend/assets/logo.jpeg"></a>
+                    <div class="mt-20 mb-20 font-xs color-text-paragraph-2">
+                        Marine Hive Ltd is a seafarere's recruitment company that offers a comprehensive range of high quality marine services.
+                        <br />
+                        It applies maritime expertise to ensure a safe and efficient operation for the shipping sector and steps ahead in providing energy to the shipping world..
+                    </div>
+                    <div class="footer-social"><a class="icon-socials icon-facebook" href="#"></a><a class="icon-socials icon-twitter" href="#"></a><a class="icon-socials icon-linkedin" href="#"></a></div>
+                </div>
+                <div class="footer-col-1 col-md-3 col-sm-12">
+                    <h6 class="mb-20">Our services</h6>
+                    <ul class="menu-footer">
+                        <li>
+                            <a style="color:black" asp-controller="Home" asp-action="CrewManning">Crew Manning & Management</a>
+                            <p style="font-size: 12px;">We are the best managers & will satisfy our clients as they need.</p>
+                        </li>
+                        <li>
+                            <a style="color:black" asp-controller="Home" asp-action="PortAgency">Port Agency</a>
+                            <p style="font-size: 12px;">We endeavor our best to handle all port related jobs in due time.</p>
+                        </li>
+                        <li><a style="color:black" asp-controller="Home" asp-action="TechServices">Technical Services</a></li>
+                        <p style="font-size: 12px;">
+                            Our professionals are at your requirements. your satisfaction is our business.
+                            <br />our team is technically sound & always looking ahead.
+                        </p>
+                        <li><a style="color:black" asp-controller="Home" asp-action="ShipManagement">Ship Management</a></li>
+                    </ul>
+                </div>
+                @*<div class="footer-col-3 col-md-2 col-xs-6">
+                <h6 class="mb-20">Community</h6>
+                <ul class="menu-footer">
+                <li><a href="#">Feature</a></li>
+                <li><a href="#">Pricing</a></li>
+                <li><a href="#">Credit</a></li>
+                <li><a href="#">FAQ</a></li>
+                </ul>
+                </div>*@
+                <div class="footer-col-1 col-md-2 col-xs-6">
+                    <h6 class="mb-20">Contact</h6>
+                    <p>
+                        Flat-B4, House-42,
+                        Azad Bhaba (3rd Floor),
+                        Road-Gorib E Newaz Avenue,
+                        Sector-11, Uttara
+                        (Opposite to Exim Bank),
+                        Dhaka-1230, Bangladesh.
+                        <br />
+                        <br />
+                        Salam Valley, Flat-8F,
+                        Shantibag (Just beside police lines),
+                        Agrabad Access Road,
+                        Chattogram-4209.
+                        <br />
+                        <br />
+                        Dhaka: <br />
+                        (+88) 02 48963662  <br />
+
+                        (+88) 02 58953384  <br />
+
+                        (+88) 01713 428984 <br />
+
+                        Chattogram:        <br />
+
+                        (+88) 01713 428989 <br />
+
+                        (+88) 01713 428980 <br />
+                        <br />
+
+                        Email: <br /> crewing@marinehive.com<br />
+                        operations@marinehive.com
+
+                    </p>
+                </div>
+                @* <div class="footer-col-5 col-md-2 col-xs-6">
+                <h6 class="mb-20">More</h6>
+                <ul class="menu-footer">
+                <li><a href="#">Privacy</a></li>
+                <li><a href="#">Help</a></li>
+                <li><a href="#">Terms</a></li>
+                <li><a href="#">FAQ</a></li>
+                </ul>
+                </div>*@
+                <div class="footer-col-6 col-md-3 col-sm-12">
+                    <h6 class="mb-20">Download App</h6>
+                    @*<p class="color-text-paragraph-2 font-xs">Download our Apps and get extra 15% Discount on your first Order&mldr;!</p>*@
+                    <div class="mt-15"><a class="mr-5" href="#"><img src="~/frontend/assets/imgs/template/icons/app-store.png" alt="joxBox"></a><a href="#"><img src="~/frontend/assets/imgs/template/icons/android.png" alt="joxBox"></a></div>
+                </div>
+            </div>
+            <div class="footer-bottom mt-50">
+                <div class="row">
+                    <div class="col-md-6"><span class="font-xs color-text-paragraph">Copyright &copy; 2023. Marine Hive all right reserved</span></div>
+                    <div class="col-md-6 text-md-end text-start">
+                        @*<div class="footer-social"><a class="font-xs color-text-paragraph" href="">Privacy Policy</a><a class="font-xs color-text-paragraph mr-30 ml-30" href="#">Terms &amp; Conditions</a><a class="font-xs color-text-paragraph" href="#">Security</a></div>*@
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="~/frontend/assets/js/vendor/modernizr-3.6.0.min.js"></script>
+    <script src="~/frontend/assets/js/vendor/jquery-3.6.0.min.js"></script>
+    <script src="~/frontend/assets/js/vendor/jquery-migrate-3.3.0.min.js"></script>
+    <script src="~/frontend/assets/js/vendor/bootstrap.bundle.min.js"></script>
+    <script src="~/frontend/assets/js/plugins/waypoints.js"></script>
+    <script src="~/frontend/assets/js/plugins/wow.js"></script>
+    <script src="~/frontend/assets/js/plugins/magnific-popup.js"></script>
+    <script src="~/frontend/assets/js/plugins/perfect-scrollbar.min.js"></script>
+    <script src="~/frontend/assets/js/plugins/select2.min.js"></script>
+    <script src="~/frontend/assets/js/plugins/isotope.js"></script>
+    <script src="~/frontend/assets/js/plugins/scrollup.js"></script>
+    <script src="~/frontend/assets/js/plugins/swiper-bundle.min.js"></script>
+    <script src="~/frontend/assets/js/plugins/counterup.js"></script>
+    <script src="~/frontend/assets/js/main.js?v=4.1"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('.main-menu').find('[href="' + window.location.pathname + '"]').addClass('active');
+        });
+
+
+    </script>
+    <style>
+        .dropbtn1 {
+            background-color: #4CAF50;
+            color: white;
+            padding: 16px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .dropdown1 {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown1-content1 {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+            .dropdown1-content1 a {
+                color: black;
+                padding: 12px 16px;
+                text-decoration: none;
+                display: block;
+            }
+
+                .dropdown1-content1 a:hover {
+                    background-color: #f1f1f1
+                }
+
+        .dropdown1:hover .dropdown1-content1 {
+            display: block;
+        }
+
+        .dropdown1:hover .dropbtn1 {
+            background-color: #3e8e41;
+        }
+    </style>
+
+</body>
+</html>
