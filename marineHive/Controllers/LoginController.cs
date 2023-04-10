@@ -102,7 +102,7 @@ namespace App.Home.Controllers
                     HttpContext.Session.SetString("session_UserName", tblUser.UserName);
 
 
-                    var name = HttpContext.Session.GetString("session_UserFirstName");
+                    var roleid = HttpContext.Session.GetInt32("session_UserRoleID");
 
                     if (!String.IsNullOrEmpty(returnUrl))
                     {
