@@ -211,9 +211,14 @@
                             <a class="dashboard2" asp-controller="Gallery" asp-action="GalleryPhotoIndex"><img src="~/dashBoard/assets/imgs/page/dashboard/computer.svg" alt="jobBox"><span class="name">Gallery Photos</span></a>
 
                         </li>
-
                         <li>
                             <a class="dashboard2" asp-controller="Executives" asp-action="ExecutiveIndex"><img src="~/dashBoard/assets/imgs/page/dashboard/candidates.svg" alt="jobBox"><span class="name">Executives</span></a>
+                        </li>
+                        <li>
+                            <a class="dashboard2" asp-controller="Crew" asp-action="CrewIndex"><img src="~/dashBoard/assets/imgs/page/dashboard/candidates.svg" alt="jobBox"><span class="name">Crews</span></a>
+                        </li>
+                        <li>
+                            <a class="dashboard2" asp-controller="Company" asp-action="CompanyIndex"><img src="~/dashBoard/assets/imgs/page/dashboard/candidates.svg" alt="jobBox"><span class="name">Company</span></a>
                         </li>
                     }
                     @if (HttpContextAccessor.HttpContext.Session.GetInt32("session_UserRoleID") == 2) // 2= Crew
