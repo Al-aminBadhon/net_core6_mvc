@@ -14,7 +14,7 @@ using System.Xml.Linq;
 
 namespace App.Home.Controllers
 {
-    //[Authorize]
+    [Authorize]
     public class ExecutivesController : Controller
     {
         private readonly MHDBContext _context;

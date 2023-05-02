@@ -14,7 +14,7 @@ using System.Xml.Linq;
 
 namespace App.Home.Controllers
 {
-    //[Authorize]
+    [Authorize]
     public class CrewsController : Controller
     {
         private readonly MHDBContext _context;
@@ -27,7 +27,7 @@ namespace App.Home.Controllers
         }
 
         // GET: Crews
-        public async Task<IActionResult> ExecutiveIndex()
+        public async Task<IActionResult> CrewIndex()
         {
             return View(await _context.TblCrews.Where(x=> x.IsActive == true).ToListAsync());
         }
@@ -51,7 +51,7 @@ namespace App.Home.Controllers
         //}
 
         // GET: Crews/Create
-        public IActionResult CreateExecutive()
+        public IActionResult CreateCrew()
         {
             return View();
         }
@@ -80,13 +80,13 @@ namespace App.Home.Controllers
                 tblExecutive.UserRoleId = 4; //4=executive - user role
                 _context.Add(tblExecutive);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(ExecutiveIndex));
+                return RedirectToAction(nameof(CrewIndex));
             }
             return View(tblExecutive);
         }
 
         // GET: Crews/Edit/5
-        public async Task<IActionResult> EditExecutive(int? id)
+        public async Task<IActionResult> EditCrew(int? id)
         {
             if (id == null)
             {
@@ -106,7 +106,7 @@ namespace App.Home.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditExecutive(int id, /*[Bind("ExecutiveId,UserRoleId,UserId,ExFirstName,ExLastName,Designation,Image,Address,Phone1,Phone2,Email,IsActive,IsApproved,CreatedDate,CreatedBy,UpdatedDate,UpdatedBy")]*/ TblExecutive tblExecutive)
+        public async Task<IActionResult> EditCrew(int id, /*[Bind("ExecutiveId,UserRoleId,UserId,ExFirstName,ExLastName,Designation,Image,Address,Phone1,Phone2,Email,IsActive,IsApproved,CreatedDate,CreatedBy,UpdatedDate,UpdatedBy")]*/ TblExecutive tblExecutive)
         {
             if (id != tblExecutive.ExecutiveId)
             {
@@ -124,7 +124,7 @@ namespace App.Home.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!TblExecutiveExists(tblExecutive.ExecutiveId))
+                    if (!TblCrewExists(tblExecutive.ExecutiveId))
                     {
                         return NotFound();
                     }
@@ -133,13 +133,13 @@ namespace App.Home.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(ExecutiveIndex));
+                return RedirectToAction(nameof(CrewIndex));
             }
             return View(tblExecutive);
         }
 
         //GET: Directors/Delete/5
-        public async Task<IActionResult> DeleteExecutive(int? id)
+        public async Task<IActionResult> DeleteCrew(int? id)
         {
             if (id == null)
             {
@@ -154,16 +154,16 @@ namespace App.Home.Controllers
             }
             else
             {
-                await DeleteExecutive(tblExecutive.CrewId);
+                await DeleteCrew(tblExecutive.CrewId);
             }
 
-            return RedirectToAction(nameof(ExecutiveIndex));
+            return RedirectToAction(nameof(CrewIndex));
         }
 
         // POST: Directors/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteExecutive(int id)
+        public async Task<IActionResult> DeleteCrew(int id)
         {
             //var tblGalleryPhoto = await _context.TblDirectors.FindAsync(id);
             //_context.TblDirectors.Remove(tblGalleryPhoto);
@@ -181,7 +181,7 @@ namespace App.Home.Controllers
         }
 
 
-        private bool TblExecutiveExists(int id)
+        private bool TblCrewExists(int id)
         {
             return _context.TblCrews.Any(e => e.CrewId == id);
         }
