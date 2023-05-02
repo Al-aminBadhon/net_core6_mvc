@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace App.DAL.Models
 {
@@ -34,5 +36,8 @@ namespace App.DAL.Models
         public string? SkypeId { get; set; }
         public string? LinkedIn { get; set; }
         public string? Facebook { get; set; }
+
+        [NotMapped]
+        public IFormFile PhotoUpload { get; set; }
     }
 }
