@@ -58,6 +58,42 @@ namespace App.Home.Controllers
             ViewData["UserRoleId"] = new SelectList(_context.TblUserRoles, "UserRoleId", "UserRoleName", tblUser.UserRoleId);
             return View(tblUser);
         }
+        public IActionResult RegisterCompany()
+        {
+            //ViewData["UserRoleId"] = new SelectList(_context.TblUserRoles, "UserRoleId", "UserRoleName");
+            return View();
+        }
+
+        // POST: Login/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> RegisterCompany( TblCompany tblCompany)
+        {
+            if (ModelState.IsValid)
+            {
+
+                tblCompany.IsActive = true;
+                //tblCompany.CreatedBy = HttpContext.Session.GetInt32("session_UserID");
+                //tblCompany.CreatedDate = DateTime.Now;
+
+                TblUser tblUser = new TblUser();
+                tblUser.UserName = tblCompany.Email;
+                tblUser.UserPassword = tblCompany.Password;
+                _context.Add(tblUser);
+                await _context.SaveChangesAsync();
+
+                tblCompany.UserId = tblUser.UserId;
+                tblCompany.UserRoleId = 2; // 2 = Crew -> user role
+                _context.Add(tblCompany);
+                await _context.SaveChangesAsync();
+                //return RedirectToAction(nameof(CrewIndex));
+                return RedirectToAction("DashboardIndex", "DashBoard");
+
+            }
+            return View(tblCompany);
+        }
 
         public IActionResult Login()
         {
