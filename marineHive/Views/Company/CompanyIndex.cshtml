@@ -1,0 +1,108 @@
+﻿@model IEnumerable<App.DAL.Models.TblCompany>
+
+@{
+    ViewData["Title"] = "Executives Index";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+
+@section scripts{
+    <script src="~/Scripts/Company/CompanyIndex.js"></script>
+}
+
+    
+
+<div class="box-content">
+
+    <div class="box-heading">
+        <div class="box-title">
+            <h3 class="mb-35">Crews Panel</h3>
+        </div>
+        <div class="box-breadcrumb">
+                <a class="btn btn-default" asp-controller="Company" asp-action="CreateCompany">Add Company</a>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="col-xl-12 col-12">
+            <div class="card-grid-2 hover-up">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <div class="box-padding">
+                            <div class="row display-list">
+                                <div class="table-responsive">
+                                        <table id="companiesList" class="stripe row-border">
+                                        <thead align="center">
+                                            <tr>
+                                                <th>
+                                                    Full Name
+                                                </th>
+                                                <th>
+                                                    Designation
+                                                </th>
+                                                <th>
+                                                    Primary Phone No.
+                                                </th>
+                                               
+                                                <th>
+                                                    Email
+                                                </th>
+                                               
+                                                <th>
+                                                    Password
+                                                </th>
+                                               
+                                                <th>
+                                                    Action
+                                                </th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in Model)
+                                            {
+
+                                                <tr>
+                                                   
+                                                    <td>
+                                                        <p class="color-text-paragraph font-sm" align="justify">@Html.DisplayFor(modelItem => item.CompanyName)  </p>
+                                                    </td>
+                                                    <td>
+                                                        <p class="color-text-paragraph font-sm" align="justify">  @Html.DisplayFor(modelItem => item.CompanyDetails)</p>
+                                                    </td>
+                                                    <td>
+                                                        <p class="color-text-paragraph font-sm" align="justify"> @Html.DisplayFor(modelItem => item.Phone1)</p>
+                                                    </td>
+                                                    <td>
+                                                        <p class="color-text-paragraph font-sm" align="justify"> @Html.DisplayFor(modelItem => item.Email)</p>
+
+                                                    </td>
+                                                    <td>
+                                                        <p class="color-text-paragraph font-sm" align="justify"> @Html.DisplayFor(modelItem => item.Address)</p>
+
+                                                    </td>@*
+                                                    <td>
+                                                        <p class="color-text-paragraph font-sm" align="justify"> <p>&nbsp;</p><img src="@item.Image" style="display: block;" /></p>
+
+                                                    </td>*@
+                                                    
+                                                    <td>
+                                                        <a asp-action="EditExecutive" class="" asp-route-id="@item.CompanyId"><i class='fas fa-edit' style='font-size:25px;color:black'></i></a> |
+                                                        <a onclick="btnDelete(@item.CompanyId)"><i class='fas fa-trash-alt' style='font-size:25px;color:red'></i></a>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -1,4 +1,4 @@
-﻿@model App.DAL.Models.TblCrew
+﻿@model App.DAL.Models.TblCompany
 
 @{
     ViewData["Title"] = "Create Crew";
@@ -8,37 +8,30 @@
 <div class="box-content">
     <div class="box-heading">
         <div class="box-title">
-            <h3 class="mb-35">Add Crew</h3>
+            <h3 class="mb-35">Add Company</h3>
         </div>
         <div class="box-breadcrumb">
-            <a class="btn btn-dark" asp-action="CrewIndex">Back to List</a>
+            <a class="btn btn-dark" asp-action="CompanyIndex">Back to List</a>
         </div>
     </div>
     <div class="row">
         <div class="form-control">
-            <form class="mt-30 ml-10 mr-10 mb-10" asp-action="CreateCrew" enctype="multipart/form-data">
+            <form class="mt-30 ml-10 mr-10 mb-10" asp-action="CreateCompany" enctype="multipart/form-data">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <input type="hidden" asp-for="UserRoleId" />
                 <input type="hidden" asp-for="UserId" />
 
                 <div class="form-group">
-                    <label class="control-label">First Name</label>
-                    <input asp-for="CrewFirstName" class="form-control" required maxlength="50" />
+                    <label class="control-label">Name</label>
+                    <input asp-for="CompanyName" class="form-control" required maxlength="50" />
                     <small class="text-muted">------Max 50 character---</small>
 
-                    <span asp-validation-for="CrewFirstName" class="text-danger"></span>
+                    <span asp-validation-for="CompanyName" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label class="control-label">Last Name</label>
-                    <input asp-for="CrewLastName" class="form-control" />
-                    <small class="text-muted">------Max 50 character---</small>
-
-                    <span asp-validation-for="CrewLastName" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="CurrentDesgination" class="control-label"></label>
-                    <input asp-for="CurrentDesgination" class="form-control" />
-                    <span asp-validation-for="CurrentDesgination" class="text-danger"></span>
+                    <label asp-for="CompanyDetails" class="control-label"></label>
+                    <input asp-for="CompanyDetails" class="form-control" />
+                    <span asp-validation-for="CompanyDetails" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label class="control-label">Upload Photo</label>
@@ -46,11 +39,11 @@
                     <span asp-validation-for="PhotoUpload" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="PresentAddress" class="control-label"></label>
-                    <input asp-for="PresentAddress" class="form-control" maxlength="100" />
+                    <label asp-for="Address" class="control-label"></label>
+                    <input asp-for="Address" class="form-control" maxlength="100" />
                     <small class="text-muted">------Max 100 character---</small>
 
-                    <span asp-validation-for="PresentAddress" class="text-danger"></span>
+                    <span asp-validation-for="Address" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label class="control-label">Phone number 1</label>

@@ -16,7 +16,7 @@
             <div class="breadcrumbs">
                 <ul>
                     <li>
-                        <a class="icon-home" href="index.html">
+                        <a class="icon-home" >
                             Admin - @if (HttpContextAccessor.HttpContext.User.Identity.IsAuthenticated)
                             {
                                 <p>Welcome, @HttpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.Name)?.Value</p>

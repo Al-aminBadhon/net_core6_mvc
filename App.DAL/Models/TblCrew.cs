@@ -36,8 +36,14 @@ namespace App.DAL.Models
         public string? SkypeId { get; set; }
         public string? LinkedIn { get; set; }
         public string? Facebook { get; set; }
+        public DateTime? CreatedDate { get; set; }
+        public int? CreatedBy { get; set; }
+        public DateTime? UpdatedDate { get; set; }
+        public int? UpdatedBy { get; set; }
 
         [NotMapped]
         public IFormFile PhotoUpload { get; set; }
+        [NotMapped]
+        public string Password { get; set; }
     }
 }

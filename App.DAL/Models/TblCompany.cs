@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace App.DAL.Models
 {
@@ -23,5 +25,10 @@ namespace App.DAL.Models
         public int? CreatedBy { get; set; }
         public DateTime? UpdatedDate { get; set; }
         public int? UpdatedBy { get; set; }
+
+        [NotMapped]
+        public IFormFile PhotoUpload { get; set; }
+        [NotMapped]
+        public string Password { get; set; }
     }
 }

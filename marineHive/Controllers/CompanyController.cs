@@ -15,24 +15,24 @@ using System.Xml.Linq;
 namespace App.Home.Controllers
 {
     [Authorize]
-    public class CrewsController : Controller
+    public class CompanyController : Controller
     {
         private readonly MHDBContext _context;
         private readonly AppUser _appUser;
 
-        public CrewsController(MHDBContext context, AppUser appUser)
+        public CompanyController(MHDBContext context, AppUser appUser)
         {
             _context = context;
             _appUser = appUser;
         }
 
-        // GET: Crews
-        public async Task<IActionResult> CrewIndex()
+        // GET: Company
+        public async Task<IActionResult> CompanyIndex()
         {
-            return View(await _context.TblCrews.Where(x=> x.IsActive == true).ToListAsync());
+            return View(await _context.TblCompanies.Where(x=> x.IsActive == true).ToListAsync());
         }
 
-        // GET: Crews/Details/5
+        // GET: Company/Details/5
         //public async Task<IActionResult> Details(int? id)
         //{
         //    if (id == null)
@@ -40,75 +40,75 @@ namespace App.Home.Controllers
         //        return NotFound();
         //    }
 
-        //    var tblCrew = await _context.TblCrews
-        //        .FirstOrDefaultAsync(m => m.ExecutiveId == id);
-        //    if (tblCrew == null)
+        //    var tblCompany = await _context.TblCompanies
+        //        .FirstOrDefaultAsync(m => m.CompanyId == id);
+        //    if (tblCompany == null)
         //    {
         //        return NotFound();
         //    }
 
-        //    return View(tblCrew);
+        //    return View(tblCompany);
         //}
 
-        // GET: Crews/Create
-        public IActionResult CreateCrew()
+        // GET: Company/Create
+        public IActionResult CreateCompany()
         {
             return View();
         }
 
-        // POST: Crews/Create
+        // POST: Company/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateCrew(TblCrew tblCrew)
+        public async Task<IActionResult> CreateCompany(TblCompany tblCompany)
         {
             if (ModelState.IsValid)
             {
                 
-                tblCrew.IsActive = true;
-                //tblCrew.CreatedBy = HttpContext.Session.GetInt32("session_UserID");
-                //tblCrew.CreatedDate = DateTime.Now;
+                tblCompany.IsActive = true;
+                tblCompany.CreatedBy = HttpContext.Session.GetInt32("session_UserID");
+                tblCompany.CreatedDate = DateTime.Now;
 
                 TblUser tblUser = new TblUser();
-                tblUser.UserName = tblCrew.Email;
-                tblUser.UserPassword = tblCrew.Password;
+                tblUser.UserName = tblCompany.Email;
+                tblUser.UserPassword = tblCompany.Password;
                 _context.Add(tblUser);
                 await _context.SaveChangesAsync();
 
-                tblCrew.UserId = tblUser.UserId;
-                tblCrew.UserRoleId = 2; // 2 = Crew -> user role
-                _context.Add(tblCrew);
+                tblCompany.UserId = tblUser.UserId;
+                tblCompany.UserRoleId = 3; //3=Company - user role
+                _context.Add(tblCompany);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(CrewIndex));
+                return RedirectToAction(nameof(CompanyIndex));
             }
-            return View(tblCrew);
+            return View(tblCompany);
         }
 
-        // GET: Crews/Edit/5
-        public async Task<IActionResult> EditCrew(int? id)
+        // GET: Company/Edit/5
+        public async Task<IActionResult> EditCompany(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var tblCrew = await _context.TblCrews.FindAsync(id);
-            if (tblCrew == null)
+            var tblCompany = await _context.TblCompanies.FindAsync(id);
+            if (tblCompany == null)
             {
                 return NotFound();
             }
-            return View(tblCrew);
+            return View(tblCompany);
         }
 
-        // POST: Crews/Edit/5
+        // POST: Company/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditCrew(int id, /*[Bind("ExecutiveId,UserRoleId,UserId,ExFirstName,ExLastName,Designation,Image,Address,Phone1,Phone2,Email,IsActive,IsApproved,CreatedDate,CreatedBy,UpdatedDate,UpdatedBy")]*/ TblCrew tblCrew)
+        public async Task<IActionResult> EditCompany(int id, /*[Bind("ExecutiveId,UserRoleId,UserId,ExFirstName,ExLastName,Designation,Image,Address,Phone1,Phone2,Email,IsActive,IsApproved,CreatedDate,CreatedBy,UpdatedDate,UpdatedBy")]*/ TblCompany tblCompany)
         {
-            if (id != tblCrew.CrewId)
+            if (id != tblCompany.CompanyId)
             {
                 return NotFound();
             }
@@ -117,14 +117,14 @@ namespace App.Home.Controllers
             {
                 try
                 {
-                    tblCrew.UpdatedBy = 1;
-                    tblCrew.UpdatedDate = DateTime.Now;
-                    _context.Update(tblCrew);
+                    tblCompany.UpdatedBy = 1;
+                    tblCompany.UpdatedDate = DateTime.Now;
+                    _context.Update(tblCompany);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!TblCrewExists(tblCrew.CrewId))
+                    if (!TblCompanyExists(tblCompany.CompanyId))
                     {
                         return NotFound();
                     }
@@ -133,57 +133,57 @@ namespace App.Home.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(CrewIndex));
+                return RedirectToAction(nameof(CompanyIndex));
             }
-            return View(tblCrew);
+            return View(tblCompany);
         }
 
         //GET: Directors/Delete/5
-        public async Task<IActionResult> DeleteCrew(int? id)
+        public async Task<IActionResult> DeleteCompany(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var tblCrew = await _context.TblCrews
-                .FirstOrDefaultAsync(m => m.CrewId == id);
-            if (tblCrew == null)
+            var tblCompany = await _context.TblCompanies
+                .FirstOrDefaultAsync(m => m.CompanyId == id);
+            if (tblCompany == null)
             {
                 return NotFound();
             }
             else
             {
-                await DeleteCrew(tblCrew.CrewId);
+                await DeleteCompany(tblCompany.CompanyId);
             }
 
-            return RedirectToAction(nameof(CrewIndex));
+            return RedirectToAction(nameof(CompanyIndex));
         }
 
         // POST: Directors/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteCrew(int id)
+        public async Task<IActionResult> DeleteCompany(int id)
         {
             //var tblGalleryPhoto = await _context.TblDirectors.FindAsync(id);
             //_context.TblDirectors.Remove(tblGalleryPhoto);
             //await _context.SaveChangesAsync();
 
 
-            var tblCrew = await _context.TblCrews.FindAsync(id);
-            tblCrew.IsActive = false;
-            _context.Update(tblCrew);
+            var tblCompany = await _context.TblCompanies.FindAsync(id);
+            tblCompany.IsActive = false;
+            _context.Update(tblCompany);
             await _context.SaveChangesAsync();
 
 
 
-            return View(tblCrew);
+            return View(tblCompany);
         }
 
 
-        private bool TblCrewExists(int id)
+        private bool TblCompanyExists(int id)
         {
-            return _context.TblCrews.Any(e => e.CrewId == id);
+            return _context.TblCompanies.Any(e => e.CompanyId == id);
         }
     }
 }
