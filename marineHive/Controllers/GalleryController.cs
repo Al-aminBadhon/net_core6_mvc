@@ -19,7 +19,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace App.Home.Controllers
 {
-    //[Authorize]
+    [Authorize]
     public class GalleryController : Controller
     {
         private readonly MHDBContext _context;
