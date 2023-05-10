@@ -85,8 +85,16 @@
                 <div class="header-nav">
                     <nav class="nav-main-menu">
                         <div class="block-signin">
+
+@*
                             <a class="btn btn-outline-dark hover-up" asp-controller="Login" asp-action="RegisterCrew">Crew Register</a> |
-                            <a class="btn btn-dark hover-up" asp-controller="Login" asp-action="RegisterCompany">Company Register</a>
+                            <a class="btn btn-dark hover-up" asp-controller="Login" asp-action="RegisterCompany">Company Register</a>*@
+                            
+                            
+                            <a class="btn btn-outline-dark hover-up" asp-controller="" asp-action="">Crew Register</a> |
+                            <a class="btn btn-dark hover-up" asp-controller="" asp-action="">Company Register</a>
+
+
                             @*<a class="btn btn-default btn-shadow ml-40 hover-up" asp-controller="Login" asp-action="Login" asp-route-returnUrl="@Context.Request.Path">Sign in</a>*@
                         </div>
                     </nav>
@@ -135,7 +143,7 @@
                             </ul>
                             </li>*@
                             <li>
-                                <a asp-controller="Home" asp-action="BoardOfDirectors">Board of Directors</a>
+                                <a asp-controller="Home" asp-action="BoardOfDirectors">Our Team</a>
                             </li>
                             @* <li class="has-children">
                             <a href="blog-grid.html">Crew Trainign</a>
@@ -185,7 +193,8 @@
                     <div class="block-signin">
                         @*<a class="text-link-bd-btom hover-up" asp-controller="Login" asp-action="Register">Register</a>*@
 
-                        <a class="btn btn-default btn-shadow ml-40 hover-up" asp-controller="Login" asp-action="Login" asp-route-returnUrl="@Context.Request.Path">Sign in</a>
+                        @*<a class="btn btn-default btn-shadow ml-40 hover-up" asp-controller="Login" asp-action="Login" asp-route-returnUrl="@Context.Request.Path">Sign in</a>*@
+                        <a class="btn btn-default btn-shadow ml-40 hover-up" asp-controller="" asp-action="">Sign in</a>
                     </div>
 
                 </div>
