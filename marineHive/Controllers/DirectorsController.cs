@@ -90,7 +90,7 @@ namespace App.Home.Controllers
         // POST: Directors/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, /*[Bind("DirectorId,DirectorName,Designation,CompanyPost,Image,Details,FacebookLink,TwitterLink,LinkedInLink,IsDeleted,CreatedDate,CreatedBy,UpdatedDate,UpdatedBy,PhotoUpload")]*/ TblDirector tblDirectors)
+        public async Task<IActionResult> Edit(int id, /*[Bind("DirectorId,DirectorName,Designation,CompanyPost,Image,Details,FacebookLink,TwitterLink,LinkedInLink,IsDeleted,CreatedDate,CreatedBy,UpdatedDate,UpdatedBy,PhotoUpload")]*/ TblDirector tblDirectors/*, IFormCollection formValues*/)
         {
             if (id != tblDirectors.DirectorId)
             {
