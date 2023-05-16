@@ -7,6 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\ckeditor_4.21.0_full\**" />
+    <Content Remove="wwwroot\ckeditor_4.21.0_full\**" />
+    <EmbeddedResource Remove="wwwroot\ckeditor_4.21.0_full\**" />
+    <None Remove="wwwroot\ckeditor_4.21.0_full\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Remove="wwwroot\scripts\company\CompanyIndex.js" />
     <Content Remove="wwwroot\scripts\crews\CrewsIndex.js" />
     <Content Remove="wwwroot\scripts\directors\CreateDirector.js" />

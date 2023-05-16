@@ -4,7 +4,7 @@
     ViewData["Title"] = "Edit";
     Layout = "~/Views/Shared/_DashboardLayout.cshtml";
 }
-<script src="https://cdn.ckeditor.com/ckeditor5/37.0.1/classic/ckeditor.js"></script>
+<script src="~/ckeditor/ckeditor.js"></script>
 <div class="box-content">
     <div class="box-heading">
         <div class="box-title">
@@ -47,8 +47,7 @@
                 </div>
                 <div class="form-group">
                     <label asp-for="Details" class="control-label"></label>
-                    <textarea id="Details" name="Details" class="form-control" rows="5"></textarea>
-                    <textarea asp-for="Details" id="Details" name="Details" class="form-control" rows="5"></textarea>
+                    <textarea asp-for="Details" class="form-control"></textarea>
 
                     <span asp-validation-for="Details" class="text-danger"></span>
                 </div>
@@ -79,11 +78,10 @@
 
 
 <script>
-    ClassicEditor
-        .create(document.querySelector('#Details'))
-        .catch(error => {
-            console.error(error);
-        });
+    CKEDITOR.replace('Details', {
+        width: '100%',
+        height: 300
+    });
 </script>
 
 
