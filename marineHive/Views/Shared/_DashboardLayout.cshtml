@@ -221,7 +221,7 @@
                             <a class="dashboard2" asp-controller="Company" asp-action="CompanyIndex"><img src="~/dashBoard/assets/imgs/page/dashboard/candidates.svg" alt="jobBox"><span class="name">Company</span></a>
                         </li>
                         <li>
-                            <a class="dashboard2" asp-controller="CrewManning" asp-action="EditCrewManning"><img src="~/dashBoard/assets/imgs/page/dashboard/candidates.svg" alt="jobBox"><span class="name">Crew Manning</span></a>
+                            <a class="dashboard2" asp-controller="CrewManning" asp-action="CrewManningIndex"><img src="~/dashBoard/assets/imgs/page/dashboard/candidates.svg" alt="jobBox"><span class="name">Crew Manning</span></a>
                         </li>
                     }
                     @if (HttpContextAccessor.HttpContext.Session.GetInt32("session_UserRoleID") == 2) // 2= Crew
