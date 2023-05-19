@@ -39,10 +39,7 @@ namespace App.Home.Controllers
 
         public async Task<IActionResult> CrewManningIndex()
         {
-            List<TblCrewManning> tblCrewMannings = await _context.TblCrewMannings.Where(x=> x.IsDeleted == false).ToListAsync();
-
-
-
+            TblCrewManning tblCrewMannings = await _context.TblCrewMannings.Where(x=> x.IsDeleted != true).FirstOrDefaultAsync();
             return View(tblCrewMannings);
         }
 
