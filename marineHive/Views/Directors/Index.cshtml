@@ -34,7 +34,7 @@
                                     </div>
                                     <div class="card-block-info">
                                          <h3>@Html.DisplayFor(modelItem => item.CompanyPost)</h3>
-                                        <p class="font-sm color-text-paragraph mt-10">@Html.DisplayFor(modelItem => item.Details)</p>
+                                        <p class="font-sm color-text-paragraph mt-10">@Html.Raw(item.Details)</p>
                                         <div class="card-2-bottom mt-20">
                                             <div class="row">
                                                 <div class="col-lg-12 col-12 text-end">
