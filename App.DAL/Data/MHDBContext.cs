@@ -22,6 +22,8 @@ namespace App.DAL.Data
         public virtual DbSet<TblCertificateType> TblCertificateTypes { get; set; } = null!;
         public virtual DbSet<TblCompany> TblCompanies { get; set; } = null!;
         public virtual DbSet<TblCrew> TblCrews { get; set; } = null!;
+        public virtual DbSet<TblCrewManning> TblCrewMannings { get; set; } = null!;
+        public virtual DbSet<TblCrewTraining> TblCrewTrainings { get; set; } = null!;
         public virtual DbSet<TblDesignation> TblDesignations { get; set; } = null!;
         public virtual DbSet<TblDesignationType> TblDesignationTypes { get; set; } = null!;
         public virtual DbSet<TblDirector> TblDirectors { get; set; } = null!;
@@ -31,8 +33,13 @@ namespace App.DAL.Data
         public virtual DbSet<TblGalleryPhoto> TblGalleryPhotos { get; set; } = null!;
         public virtual DbSet<TblJob> TblJobs { get; set; } = null!;
         public virtual DbSet<TblLoginHistory> TblLoginHistories { get; set; } = null!;
+        public virtual DbSet<TblMissionVission> TblMissionVissions { get; set; } = null!;
+        public virtual DbSet<TblOtp> TblOtps { get; set; } = null!;
+        public virtual DbSet<TblPortAgency> TblPortAgencies { get; set; } = null!;
+        public virtual DbSet<TblShipManagement> TblShipManagements { get; set; } = null!;
         public virtual DbSet<TblUser> TblUsers { get; set; } = null!;
         public virtual DbSet<TblUserRole> TblUserRoles { get; set; } = null!;
+        public virtual DbSet<TblWhyBdcrew> TblWhyBdcrews { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -153,6 +160,8 @@ namespace App.DAL.Data
                     .HasMaxLength(50)
                     .HasColumnName("CDCNumber");
 
+                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+
                 entity.Property(e => e.CrewFirstName).HasMaxLength(50);
 
                 entity.Property(e => e.CrewLastName).HasMaxLength(50);
@@ -203,15 +212,41 @@ namespace App.DAL.Data
                     .HasMaxLength(100)
                     .HasColumnName("SkypeID");
 
+                entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
+
                 entity.Property(e => e.UserId).HasColumnName("UserID");
 
                 entity.Property(e => e.UserRoleId).HasColumnName("UserRoleID");
 
                 entity.Property(e => e.Weight).HasMaxLength(10);
-                entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
+            });
+
+            modelBuilder.Entity<TblCrewManning>(entity =>
+            {
+                entity.HasKey(e => e.CrewManningId);
+
+                entity.ToTable("tblCrewManning");
+
+                entity.Property(e => e.CrewManningId).HasColumnName("CrewManningID");
+
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
 
+                entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
+            });
 
+            modelBuilder.Entity<TblCrewTraining>(entity =>
+            {
+                entity.HasKey(e => e.CrewTrainingId);
+
+                entity.ToTable("tblCrewTraining");
+
+                entity.Property(e => e.CrewTrainingId).HasColumnName("CrewTrainingID");
+
+                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.Url).HasColumnName("URL");
             });
 
             modelBuilder.Entity<TblDesignation>(entity =>
@@ -419,6 +454,62 @@ namespace App.DAL.Data
                     .HasConstraintName("FK_tblLoginHistory_tblUser");
             });
 
+            modelBuilder.Entity<TblMissionVission>(entity =>
+            {
+                entity.HasKey(e => e.MissionVissionId);
+
+                entity.ToTable("tblMissionVission");
+
+                entity.Property(e => e.MissionVissionId).HasColumnName("MissionVissionID");
+
+                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
+            });
+
+            modelBuilder.Entity<TblOtp>(entity =>
+            {
+                entity.HasKey(e => e.OtpId);
+
+                entity.ToTable("tblOTP");
+
+                entity.Property(e => e.OtpId).HasColumnName("OtpID");
+
+                entity.Property(e => e.CreateTime).HasColumnType("datetime");
+
+                entity.Property(e => e.ExpireTime).HasColumnType("datetime");
+
+                entity.Property(e => e.Otp)
+                    .HasMaxLength(50)
+                    .HasColumnName("OTP");
+            });
+
+            modelBuilder.Entity<TblPortAgency>(entity =>
+            {
+                entity.HasKey(e => e.PortAgencyId);
+
+                entity.ToTable("tblPortAgency");
+
+                entity.Property(e => e.PortAgencyId).HasColumnName("PortAgencyID");
+
+                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
+            });
+
+            modelBuilder.Entity<TblShipManagement>(entity =>
+            {
+                entity.HasKey(e => e.ShipManagementId);
+
+                entity.ToTable("tblShipManagement");
+
+                entity.Property(e => e.ShipManagementId).HasColumnName("ShipManagementID");
+
+                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
+            });
+
             modelBuilder.Entity<TblUser>(entity =>
             {
                 entity.HasKey(e => e.UserId);
@@ -457,6 +548,19 @@ namespace App.DAL.Data
                 entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
 
                 entity.Property(e => e.UserRoleName).HasMaxLength(50);
+            });
+
+            modelBuilder.Entity<TblWhyBdcrew>(entity =>
+            {
+                entity.HasKey(e => e.WhyBdcrewId);
+
+                entity.ToTable("tblWhyBDCrew");
+
+                entity.Property(e => e.WhyBdcrewId).HasColumnName("WhyBDCrewID");
+
+                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
             });
 
             OnModelCreatingPartial(modelBuilder);
