@@ -44,4 +44,12 @@
     <ProjectReference Include="..\App.BLL\App.BLL.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\images\missionVission\" />
+    <Folder Include="wwwroot\images\portAgency\" />
+    <Folder Include="wwwroot\images\ShipManagement\" />
+    <Folder Include="wwwroot\images\whyBdcrew\" />
+    <Folder Include="wwwroot\images\crewManning\" />
+  </ItemGroup>
+
 </Project>
