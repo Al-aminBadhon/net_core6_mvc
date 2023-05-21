@@ -8,5 +8,6 @@ namespace App.Home.FileUploadService
     { 
         Task<string> UploadImageDirector(TblDirector tblDirectors);
         Task<string> UploadImageGallery(TblGalleryPhoto tblGalleryPhoto);
+        Task<string> UploadImageCrewManning(TblCrewManning tblCrewManning);
     }
 }

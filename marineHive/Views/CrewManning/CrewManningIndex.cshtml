@@ -1,0 +1,79 @@
+﻿@model App.DAL.Models.TblCrewManning
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+
+<div class="box-content">
+
+       <div class="box-heading">
+    <div class="box-title">
+            <h3 class="mb-35">Crew Manning</h3>
+    </div>
+    <div class="box-breadcrumb">
+            <a asp-action="EditCrewManning" asp-route-id="@Model.CrewManningId" class="btn btn-default">Update</a>
+
+    </div>
+    </div>
+
+    <div class="row">
+
+        <div class="col-xl-12 col-12">
+            <div class="card-grid-2 hover-up">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <div class="box-padding">
+                            <div class="row display-list">
+                                <div class="table-responsive">
+                                    
+
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                
+                                                <th scope="col">Details</th>
+                                                <th scope="col">Image</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                               
+                                                
+                                                <td width="70%">
+                                                    @{
+                                                        if (Model.Details != null || Model.Details != "")
+                                                        {
+                                                                <p class="color-text-paragraph font-sm" align="justify">
+                                                                    @Html.Raw(Model.Details)
+                                                                </p>
+                                                        }
+                                                        else
+                                                        {
+                                                                <p class="color-text-paragraph font-sm" align="justify">
+
+                                                                </p>
+                                                        }
+                                                    }
+                                                </td>
+                                                <td width="30%">
+                                                    <p>&nbsp;</p><img src="@Model.Image" style="display: block;"  />
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+<div>
+    @**@
+</div>
