@@ -33,6 +33,7 @@ namespace App.Home.Controllers
             //this._CrewManningService = CrewManningService;
             this._context = mHDBContext;
             this._fileUploadService = fileUploadService;
+            this._webHostEnvironment = webHostEnvironment;
 
 
         }
@@ -77,11 +78,19 @@ namespace App.Home.Controllers
                     //    transaction.Commit();
                     //    transaction.Rollback();
                     //}
-                    var imagePath = "";
+                    
                     if (tblCrewManning.PhotoUpload != null)
                     {
-                        imagePath = await _fileUploadService.UploadImageCrewManning(tblCrewManning);
-                        tblCrewManning.Image = imagePath;
+                        if(tblCrewManning.Image != null)
+                        {
+                            string root = _webHostEnvironment.WebRootPath;
+
+                            //string existingFile = Path.Combine(_webHostEnvironment.WebRootPath, tblCrewManning.Image);
+                            string existingFile = root + tblCrewManning.Image;
+                            System.IO.File.Delete(existingFile);
+                        }
+                        tblCrewManning.Image = await _fileUploadService.UploadImageCrewManning(tblCrewManning);
+                         
                     }
                     //tblCrewManning = await _CrewManningService.UpdateCrewManningPhoto(tblCrewManning);
                     tblCrewManning.UpdatedBy = HttpContext.Session.GetInt32("session_UserID");
