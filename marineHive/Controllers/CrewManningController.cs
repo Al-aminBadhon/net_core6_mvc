@@ -83,11 +83,7 @@ namespace App.Home.Controllers
                     {
                         if(tblCrewManning.Image != null)
                         {
-                            string root = _webHostEnvironment.WebRootPath;
-
-                            //string existingFile = Path.Combine(_webHostEnvironment.WebRootPath, tblCrewManning.Image);
-                            string existingFile = root + tblCrewManning.Image;
-                            System.IO.File.Delete(existingFile);
+                             _fileUploadService.DeleteImage(tblCrewManning.Image);
                         }
                         tblCrewManning.Image = await _fileUploadService.UploadImageCrewManning(tblCrewManning);
                          
@@ -113,49 +109,6 @@ namespace App.Home.Controllers
             }
             return View(tblCrewManning);
         }
-
-        //GET: Directors/Delete/5
-        public async Task<IActionResult> CrewManningDelete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var tblCrewManning = await _context.TblCrewMannings
-                .FirstOrDefaultAsync(m => m.CrewManningId == id);
-            if (tblCrewManning == null)
-            {
-                return NotFound();
-            }
-            else
-            {
-                await CrewManningDelete(tblCrewManning.CrewManningId);
-            }
-
-            return RedirectToAction(nameof(CrewManningIndex));
-        }
-
-        // POST: Directors/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CrewManningDelete(int id) 
-        {
-            //var tblCrewManning = await _context.TblDirectors.FindAsync(id);
-            //_context.TblDirectors.Remove(tblCrewManning);
-            //await _context.SaveChangesAsync();
-
-
-            var tblCrewManning = await _context.TblCrewMannings.FindAsync(id);
-            tblCrewManning.IsDeleted = true;
-            _context.Update(tblCrewManning);
-            await _context.SaveChangesAsync();
-
-
-
-            return View(tblCrewManning);
-        }
-        
 
         private bool TblCrewManningsExists(int id)
         {

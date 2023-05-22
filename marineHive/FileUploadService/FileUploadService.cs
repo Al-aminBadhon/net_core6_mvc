@@ -56,12 +56,12 @@ namespace App.Home.FileUploadService
 
             return imagePath;
         }
-        public async Task<string> UploadImageMissionVission(TblMissionVission tblMissionVission)
+        public async Task<string> UploadImageMissionVission(IFormFile tblMissionVission)
         {
             var locationWithName = "images/missionVission/";
-            locationWithName += Guid.NewGuid().ToString() + "_" + tblMissionVission.PhotoUpload.FileName;
+            locationWithName += Guid.NewGuid().ToString() + "_" + tblMissionVission.FileName;
             var filePath = Path.Combine(_webHostEnvironment.WebRootPath, locationWithName);
-            await tblMissionVission.PhotoUpload.CopyToAsync(new FileStream(filePath, FileMode.Create));
+            await tblMissionVission.CopyToAsync(new FileStream(filePath, FileMode.Create));
             var imagePath = "/" + locationWithName;
 
             return imagePath;
@@ -95,6 +95,16 @@ namespace App.Home.FileUploadService
             var imagePath = "/" + locationWithName;
 
             return imagePath;
+        }
+
+        public void DeleteImage(string ImagePath)
+        {
+            string root = _webHostEnvironment.WebRootPath;
+
+            //string existingFile = Path.Combine(_webHostEnvironment.WebRootPath, tblCrewManning.Image);
+            string existingFile = root + ImagePath;
+            File.Delete(existingFile);
+            return;
         }
     }
 }
