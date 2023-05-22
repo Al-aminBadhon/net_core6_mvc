@@ -1,0 +1,65 @@
+﻿@model App.DAL.Models.TblWhyBdcrew
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+
+<script src="~/ckeditor/ckeditor.js"></script>
+<div class="box-content">
+    <div class="box-heading">
+        <div class="box-title">
+            <h3 class="mb-35">Update Content</h3>
+        </div>
+       @* <div class="box-breadcrumb">
+            <a class="btn btn-dark" asp-controller="Gallery" asp-action="GalleryPhotoIndex">Back to List</a>
+        </div>*@
+    </div>
+    <div class="row">
+        <div class="form-control">
+            <div class="box-padding">
+                <form asp-action="EditWhyBdcrew" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="WhyBdcrewId" />
+                <input type="hidden" asp-for="Image" />
+
+                  <h5 style="padding-bottom:10px">
+                            <label class="control-label">Curren Image</label>
+                            </h5>      
+                <img src="@Model.Image" height="150" width="300" />
+                <div class="form-group">
+                    <h5 style="padding-bottom:10px">
+                            <label class="control-label">Change Image</label>
+                            </h5>
+                    <input id="PhotoUpload" name="PhotoUpload" data-member="PhotoUpload" asp-for="PhotoUpload" class="form-control" />
+                    <span asp-validation-for="PhotoUpload" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Details" class="control-label"></label>
+                    @*<input asp-for="Details" class="form-control" />*@
+                    <textarea asp-for="Details" class="form-control" rows="5" maxlength="500"></textarea>
+                        <small class="text-muted">------Max 500 character---</small>
+
+                    <span asp-validation-for="Details" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Update" class="btn btn-secondary" />
+                </div>
+
+            </form>
+
+        </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    CKEDITOR.replace('Details', {
+        width: '100%',
+        height: 300
+    });
+</script>
+
