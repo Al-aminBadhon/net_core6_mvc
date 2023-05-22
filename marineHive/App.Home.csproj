@@ -47,7 +47,7 @@
   <ItemGroup>
     <Folder Include="wwwroot\images\missionVission\" />
     <Folder Include="wwwroot\images\portAgency\" />
-    <Folder Include="wwwroot\images\ShipManagement\" />
+    <Folder Include="wwwroot\images\shipManagement\" />
     <Folder Include="wwwroot\images\whyBdcrew\" />
   </ItemGroup>
 
