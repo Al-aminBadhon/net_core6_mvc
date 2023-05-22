@@ -229,6 +229,9 @@
                         <li>
                             <a class="dashboard2" asp-controller="PortAgency" asp-action="PortAgencyIndex"><img src="~/dashBoard/assets/imgs/page/dashboard/candidates.svg" alt="jobBox"><span class="name">Port Agency</span></a>
                         </li>
+                        <li>
+                            <a class="dashboard2" asp-controller="WhyBdcrew" asp-action="WhyBdcrewIndex"><img src="~/dashBoard/assets/imgs/page/dashboard/candidates.svg" alt="jobBox"><span class="name">Why BD Crew</span></a>
+                        </li>
                     }
                     @if (HttpContextAccessor.HttpContext.Session.GetInt32("session_UserRoleID") == 2) // 2= Crew
                     {
