@@ -1,0 +1,81 @@
+﻿@model App.DAL.Models.TblMissionVission
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+
+<script src="~/ckeditor/ckeditor.js"></script>
+<div class="box-content">
+    <div class="box-heading">
+        <div class="box-title">
+            <h3 class="mb-35">Update MIssion Vission Content</h3>
+        </div>
+       @* <div class="box-breadcrumb">
+            <a class="btn btn-dark" asp-controller="Gallery" asp-action="GalleryPhotoIndex">Back to List</a>
+        </div>*@
+    </div>
+    <div class="row">
+        <div class="form-control">
+            <div class="box-padding">
+            <form asp-action="EditMissionVission" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="MissionVissionId" />
+                <input type="hidden" asp-for="MissionImage" />
+                <input type="hidden" asp-for="VissionImage" /> 
+               <h5 style="padding-bottom:10px">Mission Image</h5>
+                <img src="@Model.MissionImage" height="150" width="300" />
+                <div class="form-group">
+                        <h5 style="padding-bottom:10px"><label class="control-label">Change Mission Image</label></h5>
+                    <input id="PhotoUpload1" name="PhotoUpload1" data-member="PhotoUpload1" asp-for="PhotoUpload1" class="form-control" />
+                    <span asp-validation-for="PhotoUpload1" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="MissionDetails" class="control-label"></label>
+                    @*<input asp-for="Details" class="form-control" />*@
+                    <textarea asp-for="MissionDetails" class="form-control" rows="5" maxlength="500"></textarea>
+                        <small class="text-muted">------Max 500 character---</small>
+
+                    <span asp-validation-for="MissionDetails" class="text-danger"></span>
+                </div>
+                    <h5>Vission Image</h5>
+                <img src="@Model.VissionImage" height="150" width="300" />
+                <div class="form-group">
+                        <h5 style="padding-bottom:10px"><label class="control-label">Change Vission Image</label></h5>
+                    <input id="PhotoUpload1" name="PhotoUpload" data-member="PhotoUpload1" asp-for="PhotoUpload1" class="form-control" />
+                    <span asp-validation-for="PhotoUpload1" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="VissionDetails" class="control-label"></label>
+                    @*<input asp-for="Details" class="form-control" />*@
+                    <textarea asp-for="VissionDetails" class="form-control" rows="5" maxlength="500"></textarea>
+                        <small class="text-muted">------Max 500 character---</small>
+
+                    <span asp-validation-for="VissionDetails" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Update" class="btn btn-secondary" />
+                </div>
+
+            </form>
+
+        </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    CKEDITOR.replace('MissionDetails', {
+        width: '100%',
+        height: 300
+    });
+    CKEDITOR.replace('VissionDetails', {
+        width: '100%',
+        height: 300
+    });
+</script>
+
