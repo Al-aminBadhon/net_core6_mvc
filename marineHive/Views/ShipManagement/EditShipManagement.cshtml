@@ -1,4 +1,4 @@
-﻿@model App.DAL.Models.TblPortAgency
+﻿@model App.DAL.Models.TblShipManagement
 
 @{
     ViewData["Title"] = "Edit";
@@ -10,7 +10,7 @@
 <div class="box-content">
     <div class="box-heading">
         <div class="box-title">
-            <h3 class="mb-35">Update Port Agency Content</h3>
+            <h3 class="mb-35">Update Ship Management Content</h3>
         </div>
        @* <div class="box-breadcrumb">
             <a class="btn btn-dark" asp-controller="Gallery" asp-action="GalleryPhotoIndex">Back to List</a>
@@ -19,18 +19,18 @@
     <div class="row">
         <div class="form-control">
             <div class="box-padding">
-            <form asp-action="EditPortAgency" enctype="multipart/form-data">
+            <form asp-action="EditShipManagement" enctype="multipart/form-data">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <input type="hidden" asp-for="PortAgencyId" />
+                <input type="hidden" asp-for="ShipManagementId" />
                 <input type="hidden" asp-for="Image" />
 
                   <h5 style="padding-bottom:10px">
-                            <label class="control-label">Current Port Agency Image</label>
+                            <label class="control-label">Current Image</label>
                             </h5>      
                 <img src="@Model.Image" height="150" width="300" />
                 <div class="form-group">
                     <h5 style="padding-bottom:10px">
-                            <label class="control-label">Change Port Agency Image</label>
+                            <label class="control-label">Change Image</label>
                             </h5>
                     <input id="PhotoUpload" name="PhotoUpload" data-member="PhotoUpload" asp-for="PhotoUpload" class="form-control" />
                     <span asp-validation-for="PhotoUpload" class="text-danger"></span>
