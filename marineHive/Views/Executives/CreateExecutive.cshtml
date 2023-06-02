@@ -18,9 +18,14 @@
         <div class="form-control">
             <form class="mt-30 ml-10 mr-10 mb-10" asp-action="CreateExecutive" enctype="multipart/form-data">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <input type="hidden" asp-for="UserRoleId" />
-                <input type="hidden" asp-for="UserId" />
-
+              @*  <input type="hidden" asp-for="UserRoleId" />
+                <input type="hidden" asp-for="UserId" />*@
+                @{
+                    if(ViewBag.ExistUser == true)
+                    {
+                        <h3 style="color:red">User Already Exist</h3>
+                    }
+                }
                 <div class="form-group">
                     <label class="control-label">First Name</label>
                     <input asp-for="ExFirstName" class="form-control" required maxlength="50" />
