@@ -19,7 +19,7 @@
                         <a class="icon-home" >
                             Admin - @if (HttpContextAccessor.HttpContext.User.Identity.IsAuthenticated)
                             {
-                                <p>Welcome, @HttpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.Name)?.Value</p>
+                                @*<p>Welcome, @HttpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.Name)?.Value</p>*@
                             }
                         </a>
                     </li>
