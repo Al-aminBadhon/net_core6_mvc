@@ -29,7 +29,8 @@ namespace App.Home.Controllers
         // GET: Executives
         public async Task<IActionResult> ExecutiveIndex()
         {
-            return View(await _context.TblExecutives.Where(x=> x.IsActive == true).ToListAsync());
+            List<TblExecutive> model = await _context.TblExecutives.Where(x => x.IsActive != false).ToListAsync();
+            return View(model);
         }
 
         // GET: Executives/Details/5
@@ -65,7 +66,15 @@ namespace App.Home.Controllers
         {
             if (ModelState.IsValid)
             {
-                
+                ViewBag.ExistUser = true;
+                var allUsers = await _context.TblUsers.Where(x => x.UserName == tblExecutive.Email).ToListAsync();
+                if(allUsers.Count != 0)
+                {
+                    ViewBag.ExistUser = "Username - " + tblExecutive.Email + "already registered";
+                    return View(tblExecutive);
+                }
+
+
                 tblExecutive.IsActive = true;
                 tblExecutive.CreatedBy = HttpContext.Session.GetInt32("session_UserID");
                 tblExecutive.CreatedDate = DateTime.Now;

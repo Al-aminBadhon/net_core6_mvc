@@ -8,8 +8,8 @@ namespace App.DAL.Models
     public partial class TblExecutive
     {
         public int ExecutiveId { get; set; }
-        public int UserRoleId { get; set; }
-        public int UserId { get; set; }
+        public int? UserRoleId { get; set; }
+        public int? UserId { get; set; }
         public string ExFirstName { get; set; } = null!;
         public string? ExLastName { get; set; }
         public string? Designation { get; set; }
@@ -26,8 +26,8 @@ namespace App.DAL.Models
         public int? UpdatedBy { get; set; }
 
         [NotMapped]
-        public IFormFile PhotoUpload { get; set; }
+        public IFormFile? PhotoUpload { get; set; }
         [NotMapped]
-        public string Password { get; set; }
+        public string? Password { get; set; }
     }
 }

@@ -5,9 +5,10 @@
     Layout = "~/Views/Shared/_DashboardLayout.cshtml";
 }
 
-
+<link href="~/customcss.css" rel="stylesheet" />
 @section scripts{
     <script src="~/scripts/Executives/ExecutivesIndex.js"></script>
+    
 }
 
     
@@ -42,7 +43,7 @@
                                                     Designation
                                                 </th>
                                                 <th>
-                                                    Primary Phone No.
+                                                    Phone No.
                                                 </th>
                                                
                                                 <th>
@@ -66,7 +67,7 @@
                                                 <tr>
                                                    
                                                     <td>
-                                                        <p class="color-text-paragraph font-sm" align="justify">@Html.DisplayFor(modelItem => item.ExFirstName + item.ExLastName)  </p>
+                                                        <p class="color-text-paragraph font-sm" align="justify">@Html.DisplayFor(modelItem => item.ExFirstName) @Html.DisplayFor(modelItem => item.ExLastName)  </p>
                                                     </td>
                                                     <td>
                                                         <p class="color-text-paragraph font-sm" align="justify">  @Html.DisplayFor(modelItem => item.Designation)</p>
@@ -88,8 +89,9 @@
                                                     </td>*@
                                                     
                                                     <td>
-                                                        <a asp-action="EditExecutive" class="" asp-route-id="@item.ExecutiveId"><i class='fas fa-edit' style='font-size:25px;color:black'></i></a> |
-                                                        <a onclick="btnDelete(@item.ExecutiveId)"><i class='fas fa-trash-alt' style='font-size:25px;color:red'></i></a>
+                                                        <a asp-action="EditExecutive" class="dt-btn-update" style="color:white; font-size: 12px !important" asp-route-id="@item.ExecutiveId">Edit</a> |
+                                                        @*<a onclick="btnDelete(@item.ExecutiveId)" class="icon-edit text-link-bd-btom hover-up" style="color:red">Delete</a>*@
+                                                        <button type="button" onclick="btnDelete(@item.ExecutiveId)" style="color:white; font-size: 12px !important" class="dt-btn-delete">Delete</button>
                                                     </td>
                                                 </tr>
                                             }

@@ -28,25 +28,25 @@
     background-color: #07398a;
     border: none;
     color: white;
-    padding: 5px 10px;
+    padding: 5px 8px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 16px;
+    font-size: 12px !important;
     margin: 4px 2px;
     cursor: pointer;
-    border-radius: 8px;
+    border-radius: 5px;
 }
 
 .dt-btn-delete {
     background-color: #800101;
     border: none;
     color: white;
-    padding: 7px 15px;
+    padding: 5px 8px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 16px;
+    font-size: 12px !important;
     margin: 4px 2px;
     cursor: pointer;
     border-radius: 8px;
