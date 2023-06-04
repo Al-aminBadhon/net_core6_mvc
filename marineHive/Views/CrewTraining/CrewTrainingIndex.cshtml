@@ -1,0 +1,92 @@
+﻿@model IEnumerable<App.DAL.Models.TblCrewTraining>
+
+@{
+    ViewData["Title"] = "Directors";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+<div class="box-content">
+
+    <div class="box-heading">
+        <div class="box-title">
+            <h3 class="mb-35">Directors</h3>
+        </div>
+        <div class="box-breadcrumb">
+            <a class="btn btn-default" asp-controller="CrewTraining" asp-action="Create">Create New</a>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="col-xl-12 col-12">
+            <div class="card-grid-2 hover-up">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <div class="box-padding">
+                            <div class="row display-list">
+                                <div class="table-responsive">
+                                    <table id="exicutivesList" class="stripe row-border">
+                                        <thead align="center">
+                                            <tr>
+                                                <th>
+                                                    Title
+                                                </th>
+                                                <th>
+                                                    Details
+                                                </th>
+                                                <th>
+                                                    URL
+                                                </th>
+
+                                                <th>
+                                                    Image
+                                                </th>
+                                                <th>
+                                                    Action
+                                                </th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in Model)
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        <p class="color-text-paragraph font-sm" align="justify">@Html.DisplayFor(modelItem => item.Title) </p>
+                                                    </td>
+                                                    <td>
+                                                        <p class="color-text-paragraph font-sm" align="justify">  @Html.DisplayFor(modelItem => item.Details)</p>
+                                                    </td>
+                                                    <td>
+                                                        <p class="color-text-paragraph font-sm" align="justify"> @Html.DisplayFor(modelItem => item.Url)</p>
+                                                    </td>
+                                                    <td>
+                                                        @if (!string.IsNullOrWhiteSpace(item.Image))
+                                                        {
+                                                            <img alt="" src="@item.Image">
+                                                        }
+                                                        else
+                                                        {
+                                                            <img alt=""  src="~/images/no-image.jpg">
+                                                        }
+
+                                                    </td>
+                                                    <td>
+                                                        <a asp-action="EditExecutive" class="dt-btn-update" style="color:white; font-size: 12px !important" asp-route-id="@item.CrewTrainingId">Update</a> |
+                                                        @*<a onclick="btnDelete(@item.ExecutiveId)" class="icon-edit text-link-bd-btom hover-up" style="color:red">Delete</a>*@
+                                                        <button type="button" onclick="btnDelete(@item.CrewTrainingId)" style="color:white; font-size: 12px !important" class="dt-btn-delete">Delete</button>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>

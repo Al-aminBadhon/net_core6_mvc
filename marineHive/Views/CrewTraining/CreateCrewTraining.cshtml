@@ -1,0 +1,66 @@
+﻿@model App.DAL.Models.TblCrewTraining
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+@*<script src="~/lib/jquery/dist/jquery.js"></script>*@
+
+<script src="~/frontend/assets/js/vendor/jquery-3.6.0.min.js"></script>
+<script src="~/frontend/assets/js/vendor/jquery-migrate-3.3.0.min.js"></script>
+<script src="~/scripts/Directors/CreateDirector.js"></script>
+
+<div class="box-content">
+
+    <div class="box-heading">
+        <div class="box-title">
+            <h3 class="mb-35">Create Director</h3>
+        </div>
+        <div class="box-breadcrumb">
+            <a class="btn btn-dark" asp-controller="CrewTraining" asp-action="CrewTrainingIndex">Back to List</a>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-6">
+            <form asp-action="Create" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+               @* <div class="form-group">
+                    <label asp-for="DirectorId" class="control-label"></label>
+                    <input id="" data-member="" id="" data-member="" asp-for="DirectorId" class="form-control" />
+                    <span asp-validation-for="DirectorId" class="text-danger"></span>
+                </div>*@
+                <div class="form-group">
+                    <label  class="control-label">Director Name</label>
+                    <input id="Title" data-member="Title" asp-for="Title" class="form-control" />
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Details" class="control-label"></label>
+                    <input id="Details" data-member="Details" asp-for="Details" class="form-control" />
+                    <span asp-validation-for="Details" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Url" class="control-label"></label>
+                    <input id="Url" data-member="Url" asp-for="Url" class="form-control" />
+                    <span asp-validation-for="Url" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label  class="control-label">Upload Profile Image</label>
+                    <input type="file" name="PhotoUpload" data-member="PhotoUpload" asp-for="PhotoUpload" class="form-control" />
+                    <span asp-validation-for="PhotoUpload" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input id="btnSaveDirector" type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+@*@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+*@
