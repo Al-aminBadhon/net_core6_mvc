@@ -37,9 +37,10 @@ namespace Core_MVC_Bootstrap.Controllers
         {
             return View();
         }
-        public IActionResult MissionVision()
+        public async Task<IActionResult> MissionVision()
         {
-            return View();
+            TblMissionVission model = await _context.TblMissionVissions.Where(x => x.IsDeleted != true).FirstOrDefaultAsync();
+            return View(model);
         }
         
         public IActionResult AboutUs()
@@ -56,16 +57,22 @@ namespace Core_MVC_Bootstrap.Controllers
         {
             return View();
         }
-        public IActionResult WhyBDCrew()
+        public async Task<IActionResult> WhyBDCrew()
         {
+            TblWhyBdcrew model = await _context.TblWhyBdcrews.Where(x => x.IsDeleted != true).FirstOrDefaultAsync();
+
             return View();
         }
-        public IActionResult CrewManning()
+        public async Task<IActionResult> CrewManning()
         {
+            TblCrewManning model = await _context.TblCrewMannings.Where(x => x.IsDeleted != true).FirstOrDefaultAsync();
+
             return View();
         }
-        public IActionResult PortAgency()
+        public async Task<IActionResult> PortAgency()
         {
+            TblPortAgency model = await _context.TblPortAgencies.Where(x => x.IsDeleted != true).FirstOrDefaultAsync();
+
             return View();
         }
         public IActionResult TechServices()
@@ -73,9 +80,10 @@ namespace Core_MVC_Bootstrap.Controllers
             return View();
         }
 
-        public IActionResult CrewTraining()
+        public async Task<IActionResult> CrewTraining()
         {
-            return View();
+            List<TblCrewTraining> model = await _context.TblCrewTrainings.Where(x => x.IsDeleted != true).ToListAsync();
+            return View(model);
         }
         public async Task<IActionResult> BoardOfDirectors()
         {
@@ -83,8 +91,10 @@ namespace Core_MVC_Bootstrap.Controllers
 
             return View(listDirectors);
         }
-        public  IActionResult ShipManagement()
+        public  async Task<IActionResult> ShipManagement()
         {
+            TblShipManagement model = await _context.TblShipManagements.Where(x => x.IsDeleted != true).FirstOrDefaultAsync();
+
             return View();
         }
 
