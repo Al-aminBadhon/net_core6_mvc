@@ -25,11 +25,12 @@
 }
 
 .dt-btn-update {
-    background-color: #07398a;
+    background-color: #0000b3;
     border: none;
     color: white;
     padding: 5px 8px;
     text-align: center;
+    font-weight: 500;
     text-decoration: none;
     display: inline-block;
     font-size: 12px !important;
@@ -39,9 +40,10 @@
 }
 
 .dt-btn-delete {
-    background-color: #800101;
+    background-color: #ff3333;
     border: none;
     color: white;
+    font-weight: 500;
     padding: 5px 8px;
     text-align: center;
     text-decoration: none;

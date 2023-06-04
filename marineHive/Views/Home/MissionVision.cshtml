@@ -1,4 +1,6 @@
-﻿@{
+﻿@model App.DAL.Models.TblMissionVission
+
+@{
     ViewData["Title"] = "Mission & Vision";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -41,12 +43,12 @@
                     </p>*@
                 </div>
                 <div class="row mt-70">
-                    <div class="col-lg-6 col-md-12 col-sm-12"><img src="~/images/img-about.jpg" alt="joxBox"></div>
+                    <div class="col-lg-6 col-md-12 col-sm-12"><img src="@Model.MissionImage" alt="joxBox"></div>
                     <div class="col-lg-6 col-md-12 col-sm-12">
                         <h3 class="mt-15">Our Mission</h3>
                         <div class="mt-20">
                             <p class="font-md color-text-paragraph mt-20">
-                                To be the leading provider of Quality Marine Hive to the Marine Industry
+                                @Html.Raw(Model.MissionDetails)
 
 
 
@@ -61,15 +63,7 @@
                         <h3 class="mt-15">Our Vision</h3>
                         <div class="mt-20">
                             <p class="font-md color-text-paragraph mt-20 ">
-                                To be a role model in our industry by providing a highly professional, dedicated and transparent ship management services to our customers/clients.
-
-                                To prevent human injury, loss of life and to avoid damage to the environment by pursuing a policy of zero accidents and zero spills.
-
-                                To encourage and foster an innovative spirit with the aim of continuously seeking improvements to the quality and services offered by us to our customers.
-
-                                To build a long lasting relationship with our customers and employees and to continuously aim to excel industry's highest standards.
-
-                                To conserve energy through operation/equipment modification
+                                @Html.Raw(Model.VissionDetails)
                             </p>
                         </div>
                         @*<div class="mt-30"><a class="btn btn-brand-1" href="#">Read More</a></div>*@

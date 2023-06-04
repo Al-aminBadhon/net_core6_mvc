@@ -1,26 +1,17 @@
-﻿@model IEnumerable<App.DAL.Models.TblExecutive>
+﻿@model IEnumerable<App.DAL.Models.TblCrewTraining>
 
 @{
-    ViewData["Title"] = "Executives Index";
+    ViewData["Title"] = "Directors";
     Layout = "~/Views/Shared/_DashboardLayout.cshtml";
 }
-
-<link href="~/customcss.css" rel="stylesheet" />
-@section scripts{
-    <script src="~/scripts/Executives/ExecutivesIndex.js"></script>
-    
-}
-
-    
-
 <div class="box-content">
 
     <div class="box-heading">
         <div class="box-title">
-            <h3 class="mb-35">Executives Panel</h3>
+            <h3 class="mb-35">Directors</h3>
         </div>
         <div class="box-breadcrumb">
-            <a class="btn btn-default" asp-controller="Executives" asp-action="CreateExecutive">Add Executives</a>
+            <a class="btn btn-default" asp-controller="CrewTraining" asp-action="Create">Create New</a>
         </div>
     </div>
 
@@ -37,23 +28,18 @@
                                         <thead align="center">
                                             <tr>
                                                 <th>
-                                                    Full Name
+                                                    Title
                                                 </th>
                                                 <th>
-                                                    Designation
+                                                    Details
                                                 </th>
                                                 <th>
-                                                    Phone No.
+                                                    URL
                                                 </th>
-                                               
+
                                                 <th>
-                                                    Email
+                                                    Image
                                                 </th>
-                                               
-                                                <th>
-                                                    Password
-                                                </th>
-                                               
                                                 <th>
                                                     Action
                                                 </th>
@@ -63,35 +49,31 @@
                                         <tbody>
                                             @foreach (var item in Model)
                                             {
-
                                                 <tr>
-                                                   
                                                     <td>
-                                                        <p class="color-text-paragraph font-sm" align="justify">@Html.DisplayFor(modelItem => item.ExFirstName) @Html.DisplayFor(modelItem => item.ExLastName)  </p>
+                                                        <p class="color-text-paragraph font-sm" align="justify">@Html.DisplayFor(modelItem => item.Title) </p>
                                                     </td>
                                                     <td>
-                                                        <p class="color-text-paragraph font-sm" align="justify">  @Html.DisplayFor(modelItem => item.Designation)</p>
+                                                        <p class="color-text-paragraph font-sm" align="justify">  @Html.DisplayFor(modelItem => item.Details)</p>
                                                     </td>
                                                     <td>
-                                                        <p class="color-text-paragraph font-sm" align="justify"> @Html.DisplayFor(modelItem => item.Phone1)</p>
+                                                        <p class="color-text-paragraph font-sm" align="justify"> @Html.DisplayFor(modelItem => item.Url)</p>
                                                     </td>
                                                     <td>
-                                                        <p class="color-text-paragraph font-sm" align="justify"> @Html.DisplayFor(modelItem => item.Email)</p>
+                                                        @if (!string.IsNullOrWhiteSpace(item.Image))
+                                                        {
+                                                            <img alt="" src="@item.Image">
+                                                        }
+                                                        else
+                                                        {
+                                                            <img alt=""  src="~/images/no-image.jpg">
+                                                        }
 
                                                     </td>
                                                     <td>
-                                                        <p class="color-text-paragraph font-sm" align="justify"> @Html.DisplayFor(modelItem => item.Password)</p>
-
-                                                    </td>@*
-                                                    <td>
-                                                        <p class="color-text-paragraph font-sm" align="justify"> <p>&nbsp;</p><img src="@item.Image" style="display: block;" /></p>
-
-                                                    </td>*@
-                                                    
-                                                    <td>
-                                                        <a asp-action="EditExecutive" class="dt-btn-update" style="color:white; font-size: 12px !important" asp-route-id="@item.ExecutiveId">Update</a> |
+                                                        <a asp-action="EditExecutive" class="dt-btn-update" style="color:white; font-size: 12px !important" asp-route-id="@item.CrewTrainingId">Update</a> |
                                                         @*<a onclick="btnDelete(@item.ExecutiveId)" class="icon-edit text-link-bd-btom hover-up" style="color:red">Delete</a>*@
-                                                        <button type="button" onclick="btnDelete(@item.ExecutiveId)" style="color:white; font-size: 12px !important" class="dt-btn-delete">Delete</button>
+                                                        <button type="button" onclick="btnDelete(@item.CrewTrainingId)" style="color:white; font-size: 12px !important" class="dt-btn-delete">Delete</button>
                                                     </td>
                                                 </tr>
                                             }
