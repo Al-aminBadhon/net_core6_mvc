@@ -67,13 +67,13 @@ namespace Core_MVC_Bootstrap.Controllers
         {
             var model = await _context.TblCrewMannings.Where(x => x.IsDeleted != true).FirstOrDefaultAsync();
 
-            return View();
+            return View(model);
         }
         public async Task<IActionResult> PortAgency()
         {
             var model = await _context.TblPortAgencies.Where(x => x.IsDeleted != true).FirstOrDefaultAsync();
 
-            return View();
+            return View(model);
         }
         public IActionResult TechServices()
         {
@@ -95,7 +95,7 @@ namespace Core_MVC_Bootstrap.Controllers
         {
             TblShipManagement model = await _context.TblShipManagements.Where(x => x.IsDeleted != true).FirstOrDefaultAsync();
 
-            return View();
+            return View(model);
         }
 
         public  IActionResult Gallery()
