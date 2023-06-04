@@ -39,7 +39,7 @@ namespace Core_MVC_Bootstrap.Controllers
         }
         public async Task<IActionResult> MissionVision()
         {
-            TblMissionVission model = await _context.TblMissionVissions.Where(x => x.IsDeleted != true).FirstOrDefaultAsync();
+            var model = await _context.TblMissionVissions.Where(x => x.IsDeleted != true).FirstOrDefaultAsync();
             return View(model);
         }
         
@@ -59,19 +59,19 @@ namespace Core_MVC_Bootstrap.Controllers
         }
         public async Task<IActionResult> WhyBDCrew()
         {
-            TblWhyBdcrew model = await _context.TblWhyBdcrews.Where(x => x.IsDeleted != true).FirstOrDefaultAsync();
+            var model = await _context.TblWhyBdcrews.Where(x => x.IsDeleted != true).FirstOrDefaultAsync();
 
-            return View();
+            return View(model);
         }
         public async Task<IActionResult> CrewManning()
         {
-            TblCrewManning model = await _context.TblCrewMannings.Where(x => x.IsDeleted != true).FirstOrDefaultAsync();
+            var model = await _context.TblCrewMannings.Where(x => x.IsDeleted != true).FirstOrDefaultAsync();
 
             return View();
         }
         public async Task<IActionResult> PortAgency()
         {
-            TblPortAgency model = await _context.TblPortAgencies.Where(x => x.IsDeleted != true).FirstOrDefaultAsync();
+            var model = await _context.TblPortAgencies.Where(x => x.IsDeleted != true).FirstOrDefaultAsync();
 
             return View();
         }
