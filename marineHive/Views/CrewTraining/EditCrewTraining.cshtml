@@ -1,38 +1,28 @@
 ﻿@model App.DAL.Models.TblCrewTraining
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Edit";
     Layout = "~/Views/Shared/_DashboardLayout.cshtml";
 }
-
-@*<script src="~/lib/jquery/dist/jquery.js"></script>*@
-
-<script src="~/frontend/assets/js/vendor/jquery-3.6.0.min.js"></script>
-<script src="~/frontend/assets/js/vendor/jquery-migrate-3.3.0.min.js"></script>
-<script src="~/scripts/Directors/CreateDirector.js"></script>
 <script src="~/ckeditor/ckeditor.js"></script>
 <div class="box-content">
-
     <div class="box-heading">
         <div class="box-title">
-            <h3 class="mb-35">Create Director</h3>
+            <h3 class="mb-35">Update Director</h3>
         </div>
         <div class="box-breadcrumb">
             <a class="btn btn-dark" asp-controller="CrewTraining" asp-action="CrewTrainingIndex">Back to List</a>
         </div>
     </div>
-    
     <div class="row">
-        <div class="col-md-12">
-            <form asp-action="Create" enctype="multipart/form-data">
+        <div class="form-control">
+            <form asp-action="EditCrewTraining" enctype="multipart/form-data">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-               @* <div class="form-group">
-                    <label asp-for="DirectorId" class="control-label"></label>
-                    <input id="" data-member="" id="" data-member="" asp-for="DirectorId" class="form-control" />
-                    <span asp-validation-for="DirectorId" class="text-danger"></span>
-                </div>*@
+                <input type="hidden" asp-for="CrewTrainingId" />
+                <input type="hidden" asp-for="Image" />
+
                 <div class="form-group">
-                    <label  class="control-label">Director Name</label>
+                    <label class="control-label">Title Name</label>
                     <input id="Title" data-member="Title" asp-for="Title" class="form-control" />
                     <span asp-validation-for="Title" class="text-danger"></span>
                 </div>
@@ -46,24 +36,27 @@
                     <input id="Url" data-member="Url" asp-for="Url" class="form-control" />
                     <span asp-validation-for="Url" class="text-danger"></span>
                 </div>
+               
+
+
+                @*<label asp-for="Image" class="control-label"></label>
+                <input asp-for="Image" class="form-control" />*@
+                <img src="@Model.Image" height="150" width="300" />
                 <div class="form-group">
-                    <label  class="control-label">Upload Profile Image</label>
-                    <input type="file" name="PhotoUpload" data-member="PhotoUpload" asp-for="PhotoUpload" class="form-control" />
+                    <label class="control-label">Change Profile Image</label>
+                    <input id="PhotoUpload" name="PhotoUpload" data-member="PhotoUpload" asp-for="PhotoUpload" class="form-control" />
                     <span asp-validation-for="PhotoUpload" class="text-danger"></span>
                 </div>
+               
                 <div class="form-group">
-                    <input id="btnSaveDirector" type="submit" value="Create" class="btn btn-primary" />
+                    <input type="submit" value="Save" class="btn btn-primary" />
                 </div>
             </form>
+
         </div>
     </div>
-
 </div>
 
-@*@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
-*@
 
 <script>
     CKEDITOR.replace('Details', {
@@ -71,3 +64,8 @@
         height: 300
     });
 </script>
+
+
+@*@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }*@

@@ -16,6 +16,7 @@
   <ItemGroup>
     <Content Remove="wwwroot\scripts\company\CompanyIndex.js" />
     <Content Remove="wwwroot\scripts\crews\CrewsIndex.js" />
+    <Content Remove="wwwroot\scripts\CrewTraining\CrewTrainingIndex.js" />
     <Content Remove="wwwroot\scripts\directors\CreateDirector.js" />
     <Content Remove="wwwroot\scripts\executives\ExecutivesIndex.js" />
     <Content Remove="wwwroot\scripts\gallery\GalleryPhotoIndex.js" />
@@ -24,6 +25,7 @@
   <ItemGroup>
     <None Include="wwwroot\scripts\company\companyIndex.js" />
     <None Include="wwwroot\scripts\crews\CrewsIndex.js" />
+    <None Include="wwwroot\scripts\CrewTraining\CrewTrainingIndex.js" />
     <None Include="wwwroot\scripts\directors\CreateDirector.js" />
     <None Include="wwwroot\scripts\executives\ExecutivesIndex.js" />
     <None Include="wwwroot\scripts\gallery\GalleryPhotoIndex.js" />
