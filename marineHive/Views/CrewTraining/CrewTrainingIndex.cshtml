@@ -4,6 +4,14 @@
     ViewData["Title"] = "Directors";
     Layout = "~/Views/Shared/_DashboardLayout.cshtml";
 }
+
+
+<link href="~/customcss.css" rel="stylesheet" />
+@section scripts{
+    <script src="~/scripts/crewTraining/CrewTrainingIndex.js"></script>
+
+
+}
 <div class="box-content">
 
     <div class="box-heading">
@@ -11,7 +19,7 @@
             <h3 class="mb-35">Directors</h3>
         </div>
         <div class="box-breadcrumb">
-            <a class="btn btn-default" asp-controller="CrewTraining" asp-action="Create">Create New</a>
+            <a class="btn btn-default" asp-controller="CrewTraining" asp-action="CreateCrewTraining">Create New</a>
         </div>
     </div>
 
@@ -24,7 +32,7 @@
                         <div class="box-padding">
                             <div class="row display-list">
                                 <div class="table-responsive">
-                                    <table id="exicutivesList" class="stripe row-border">
+                                    <table id="CrewTrainingList" class="stripe row-border">
                                         <thead align="center">
                                             <tr>
                                                 <th>
