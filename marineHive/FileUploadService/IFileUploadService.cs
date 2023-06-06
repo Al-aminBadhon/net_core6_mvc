@@ -10,7 +10,7 @@ namespace App.Home.FileUploadService
         Task<string> UploadImageGallery(TblGalleryPhoto tblGalleryPhoto);
         Task<string> UploadImageCrewManning(TblCrewManning tblCrewManning);
         Task<string> UploadImageCrewTraining(TblCrewTraining tblCrewTraining);
-        Task<string> UploadImageExecutive(TblCrewTraining tblCrewTraining);
+        Task<string> UploadImageExecutive(TblExecutive tblExecutive);
         Task<string> UploadImageMissionVission(IFormFile tblMissionVission);
         Task<string> UploadImagePortAgency(TblPortAgency tblPortAgency);
         Task<string> UploadImageShipManagement(TblShipManagement tblShipManagement);

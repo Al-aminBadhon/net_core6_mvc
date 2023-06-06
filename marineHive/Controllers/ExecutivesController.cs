@@ -121,7 +121,7 @@ namespace App.Home.Controllers
                 //_CrewTrainingService.CreateCrewTraining(tblCrewTraining);
                 if (tblExecutive.PhotoUpload != null)
                 {
-                    imagePath = await _fileUploadService.UploadImageCrewTraining(tblCrewTraining);
+                    imagePath = await _fileUploadService.UploadImageExecutive(tblExecutive);
                     tblExecutive.Image = imagePath;
                 }
                 tblExecutive.UserId = tblUser.UserId;
