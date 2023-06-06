@@ -29,5 +29,7 @@ namespace App.DAL.Models
         public IFormFile? PhotoUpload { get; set; }
         [NotMapped]
         public string? Password { get; set; }
+        [NotMapped]
+        public string? Usertype { get; set; }
     }
 }

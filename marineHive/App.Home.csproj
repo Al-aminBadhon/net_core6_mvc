@@ -48,6 +48,7 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\images\missionVission\" />
+    <Folder Include="wwwroot\images\executive\" />
     <Folder Include="wwwroot\images\portAgency\" />
     <Folder Include="wwwroot\images\shipManagement\" />
     <Folder Include="wwwroot\images\whyBdcrew\" />

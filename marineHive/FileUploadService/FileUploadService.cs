@@ -56,6 +56,16 @@ namespace App.Home.FileUploadService
 
             return imagePath;
         }
+        public async Task<string> UploadImageExecutive(TblExecutive tblExecutive)
+        {
+            var locationWithName = "images/executive/";
+            locationWithName += Guid.NewGuid().ToString() + "_" + tblExecutive.PhotoUpload.FileName;
+            var filePath = Path.Combine(_webHostEnvironment.WebRootPath, locationWithName);
+            await tblExecutive.PhotoUpload.CopyToAsync(new FileStream(filePath, FileMode.Create));
+            var imagePath = "/" + locationWithName;
+
+            return imagePath;
+        }
         public async Task<string> UploadImageMissionVission(IFormFile tblMissionVission)
         {
             var locationWithName = "images/missionVission/";

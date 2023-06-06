@@ -27,9 +27,10 @@ namespace Core_MVC_Bootstrap.Controllers
             this._context = context;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            
+            List<TblExecutive> tblExecutives = await _context.TblExecutives.Where(a=> a.IsActive != false && a.UserRoleId == 4).ToListAsync();
+            ViewBag.TblExecutives = tblExecutives;
             return View();
         }
 

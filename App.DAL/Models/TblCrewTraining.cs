@@ -18,6 +18,6 @@ namespace App.DAL.Models
         public DateTime? UpdatedDate { get; set; }
         public int? UpdatedBy { get; set; }
         [NotMapped]
-        public IFormFile PhotoUpload { get; set; }
+        public IFormFile? PhotoUpload { get; set; }
     }
 }

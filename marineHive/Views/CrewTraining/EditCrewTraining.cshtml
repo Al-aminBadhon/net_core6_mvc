@@ -28,7 +28,8 @@
                 </div>
                 <div class="form-group">
                     <label asp-for="Details" class="control-label"></label>
-                    <input id="Details" data-member="Details" asp-for="Details" class="form-control" />
+                    <textarea asp-for="Details" class="form-control" rows="5" maxlength="500"></textarea>
+                    <small class="text-muted">------Max 500 character---</small>
                     <span asp-validation-for="Details" class="text-danger"></span>
                 </div>
                 <div class="form-group">

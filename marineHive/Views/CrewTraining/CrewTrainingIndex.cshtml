@@ -62,7 +62,7 @@
                                                         <p class="color-text-paragraph font-sm" align="justify">@Html.DisplayFor(modelItem => item.Title) </p>
                                                     </td>
                                                     <td>
-                                                        <p class="color-text-paragraph font-sm" align="justify">  @Html.DisplayFor(modelItem => item.Details)</p>
+                                                        <p class="color-text-paragraph font-sm" align="justify">  @Html.Raw(item.Details)</p>
                                                     </td>
                                                     <td>
                                                         <p class="color-text-paragraph font-sm" align="justify"> @Html.DisplayFor(modelItem => item.Url)</p>
@@ -70,16 +70,19 @@
                                                     <td>
                                                         @if (!string.IsNullOrWhiteSpace(item.Image))
                                                         {
-                                                            <img alt="" src="@item.Image">
+                                                            
+                                                            <p>&nbsp;</p>
+
+                                                            <img src="@item.Image" style="display: block;" />
                                                         }
                                                         else
                                                         {
-                                                            <img alt=""  src="~/images/no-image.jpg">
+                                                            <p>&nbsp;</p> <img alt="" style="display: block;" src="~/images/no-image.jpg">
                                                         }
 
                                                     </td>
                                                     <td>
-                                                        <a asp-action="EditExecutive" class="dt-btn-update" style="color:white; font-size: 12px !important" asp-route-id="@item.CrewTrainingId">Update</a> |
+                                                        <a asp-action="EditCrewTraining" class="dt-btn-update" style="color:white; font-size: 12px !important" asp-route-id="@item.CrewTrainingId">Update</a> |
                                                         @*<a onclick="btnDelete(@item.ExecutiveId)" class="icon-edit text-link-bd-btom hover-up" style="color:red">Delete</a>*@
                                                         <button type="button" onclick="btnDelete(@item.CrewTrainingId)" style="color:white; font-size: 12px !important" class="dt-btn-delete">Delete</button>
                                                     </td>

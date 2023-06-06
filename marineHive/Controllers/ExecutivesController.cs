@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 using App.DAL.Utilities;
 using Microsoft.AspNetCore.Http;
 using System.Xml.Linq;
+using App.Home.FileUploadService;
 
 namespace App.Home.Controllers
 {
@@ -19,11 +20,13 @@ namespace App.Home.Controllers
     {
         private readonly MHDBContext _context;
         private readonly AppUser _appUser;
+        private readonly IFileUploadService _fileUploadService;
 
-        public ExecutivesController(MHDBContext context, AppUser appUser)
+        public ExecutivesController(MHDBContext context, IFileUploadService fileUploadService, AppUser appUser)
         {
             _context = context;
             _appUser = appUser;
+            _fileUploadService = fileUploadService;
         }
 
         // GET: Executives
@@ -52,8 +55,15 @@ namespace App.Home.Controllers
         //}
 
         // GET: Executives/Create
-        public IActionResult CreateExecutive()
+        public async Task<IActionResult> CreateExecutive()
         {
+
+            List<string> allUsers = new List<string>()
+            {
+                "Super admin" , "Executive"
+
+            };
+            ViewBag.allUser = allUsers;
             return View();
         }
 
@@ -82,9 +92,38 @@ namespace App.Home.Controllers
                 TblUser tblUser = new TblUser();
                 tblUser.UserName = tblExecutive.Email;
                 tblUser.UserPassword = tblExecutive.Password;
+                tblUser.IsActive = true;
+                tblUser.IsConfirmed = true;
+                tblUser.UserRoleId = 4;
+                if (tblExecutive.Usertype == "Super admin")
+                {
+                    tblUser.UserId = 1;
+                }
+                //else if(tblExecutive.Usertype == "Crew")
+                //{
+                //    tblUser.UserId = 2;
+                //}
+                //else if(tblExecutive.Usertype == "Company")
+                //{
+                //    tblUser.UserId = 3;
+                //}
+                else if (tblExecutive.Usertype == "Executive")
+                {
+                    tblUser.UserId = 4;
+                }
+
+
                 _context.Add(tblUser);
                 await _context.SaveChangesAsync();
 
+
+                var imagePath = "";
+                //_CrewTrainingService.CreateCrewTraining(tblCrewTraining);
+                if (tblExecutive.PhotoUpload != null)
+                {
+                    imagePath = await _fileUploadService.UploadImageCrewTraining(tblCrewTraining);
+                    tblExecutive.Image = imagePath;
+                }
                 tblExecutive.UserId = tblUser.UserId;
                 tblExecutive.UserRoleId = 4; //4=executive - user role
                 _context.Add(tblExecutive);
@@ -103,6 +142,10 @@ namespace App.Home.Controllers
             }
 
             var tblExecutive = await _context.TblExecutives.FindAsync(id);
+
+            var user = await _context.TblUsers.FindAsync(id);
+            tblExecutive.Password = user.UserPassword;
+
             if (tblExecutive == null)
             {
                 return NotFound();

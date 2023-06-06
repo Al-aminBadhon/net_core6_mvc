@@ -68,6 +68,15 @@
                     <span asp-validation-for="Phone2" class="text-danger"></span>
                 </div>
                 <div class="form-group">
+                    <label class="control-label">User Type</label>
+                    <select asp-for="Usertype" name="allUser" class="form-control" asp-items="new SelectList(ViewBag.allUser)" required>
+                        <option value=""> --- Select One ---</option>
+                    </select>
+
+                    @* <input asp-for="Flag" class="form-control" required/>*@
+                    <span asp-validation-for="Usertype" class="text-danger"></span>
+                </div>
+                <div class="form-group">
                     <label asp-for="Email" class="control-label"></label>
                     <input asp-for="Email" class="form-control" required/>
                     <span asp-validation-for="Email" class="text-danger"></span>
