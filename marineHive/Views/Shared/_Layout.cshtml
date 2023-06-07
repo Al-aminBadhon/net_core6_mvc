@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@inject IHttpContextAccessor HttpContextAccessor
+@{
+    var userId = @HttpContextAccessor.HttpContext.Session.GetInt32("session_UserRoleID");
+}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -86,14 +91,22 @@
                     <nav class="nav-main-menu">
                         <div class="block-signin">
 
-@*
+                            @*
                             <a class="btn btn-outline-dark hover-up" asp-controller="Login" asp-action="RegisterCrew">Crew Register</a> |
                             <a class="btn btn-dark hover-up" asp-controller="Login" asp-action="RegisterCompany">Company Register</a>*@
-                            
-                            
-                            <a class="btn btn-outline-dark hover-up" asp-controller="" asp-action="">Crew Register</a> |
-                            <a class="btn btn-dark hover-up" asp-controller="" asp-action="">Company Register</a>
 
+
+                            
+
+                            @{
+                                if (userId == null)
+                                {
+                                    <a class="btn btn-outline-dark hover-up" asp-controller="" asp-action="">Crew Register</a>
+                                    <a class="btn btn-dark hover-up" asp-controller="" asp-action="">Company Register</a>
+
+                                }
+                               
+                            }
 
                             @*<a class="btn btn-default btn-shadow ml-40 hover-up" asp-controller="Login" asp-action="Login" asp-route-returnUrl="@Context.Request.Path">Sign in</a>*@
                         </div>
@@ -192,9 +205,20 @@
                 <div class="header-right">
                     <div class="block-signin">
                         @*<a class="text-link-bd-btom hover-up" asp-controller="Login" asp-action="Register">Register</a>*@
+                        @{
+                            //var userId = @HttpContextAccessor.HttpContext.Session.GetInt32("session_UserRoleID");
+                            if (userId == null)
+                            {
+                                <a class="btn btn-default btn-shadow ml-40 hover-up" asp-controller="Login" asp-action="Login" asp-route-returnUrl="@Context.Request.Path">Admin Sign in</a>
 
-                        @*<a class="btn btn-default btn-shadow ml-40 hover-up" asp-controller="Login" asp-action="Login" asp-route-returnUrl="@Context.Request.Path">Sign in</a>*@
-                        <a class="btn btn-default btn-shadow ml-40 hover-up" asp-controller="" asp-action="">Sign in</a>
+                            }
+                            else
+                            {
+                                <a class="btn btn-outline-dark hover-up" asp-controller="Dashboard" asp-action="DashboardIndex" asp-route-returnUrl="@Context.Request.Path">Dash Board</a>
+
+                            }
+                        }
+                        @*<a class="btn btn-default btn-shadow ml-40 hover-up" asp-controller="" asp-action="">Sign in</a>*@
                     </div>
 
                 </div>

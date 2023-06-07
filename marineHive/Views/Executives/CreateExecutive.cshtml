@@ -14,16 +14,17 @@
             <a class="btn btn-dark" asp-action="ExecutiveIndex">Back to List</a>
         </div>
     </div>
+
     <div class="row">
-        <div class="form-control">
+        <div class="col-md-12">
             <form class="mt-30 ml-10 mr-10 mb-10" asp-action="CreateExecutive" enctype="multipart/form-data">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
               @*  <input type="hidden" asp-for="UserRoleId" />
                 <input type="hidden" asp-for="UserId" />*@
                 @{
-                    if(ViewBag.ExistUser == true)
+                    if(ViewData["ExistUser"] != null)
                     {
-                        <h3 style="color:red">User Already Exist</h3>
+                        <h3 style="color:red">User name "@Model.Email" is already registered</h3>
                     }
                 }
                 <div class="form-group">
@@ -69,7 +70,7 @@
                 </div>
                 <div class="form-group">
                     <label class="control-label">User Type</label>
-                    <select asp-for="Usertype" name="allUser" class="form-control" asp-items="new SelectList(ViewBag.allUser)" required>
+                    <select asp-for="Usertype" name="allUser" class="form-control" asp-items="new SelectList(@ViewBag.allUser)" required>
                         <option value=""> --- Select One ---</option>
                     </select>
 
@@ -88,7 +89,7 @@
                 </div>
 
                 <div class="form-group">
-                    <input type="submit" value="CreateExecutive" class="btn btn-primary" />
+                    <input type="submit" value="Create Executive" class="btn btn-primary" />
                 </div>
             </form>
         </div>
