@@ -53,7 +53,7 @@ namespace App.Home.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateCrewTraining(/*[Bind("DirectorId,DirectorName,Designation,CompanyPost,Image,Details,FacebookLink,TwitterLink,LinkedInLink,IsDeleted,CreatedDate,CreatedBy,UpdatedDate,UpdatedBy")]*/ TblDirector tblCrewTraining)
+        public async Task<IActionResult> CreateCrewTraining(/*[Bind("DirectorId,DirectorName,Designation,CompanyPost,Image,Details,FacebookLink,TwitterLink,LinkedInLink,IsDeleted,CreatedDate,CreatedBy,UpdatedDate,UpdatedBy")]*/ TblCrewTraining tblCrewTraining)
         {
             if (ModelState.IsValid)
             {
@@ -61,12 +61,12 @@ namespace App.Home.Controllers
                 //_CrewTrainingService.CreateCrewTraining(tblCrewTraining);
                 if (tblCrewTraining.PhotoUpload != null)
                 {
-                    imagePath = await _fileUploadService.UploadImageDirector(tblCrewTraining);
+                    imagePath = await _fileUploadService.UploadImageCrewTraining(tblCrewTraining);
                     tblCrewTraining.Image = imagePath;
                 }
                 _context.Add(tblCrewTraining);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(CrewTrainingIndex));
             }
             return View(tblCrewTraining);
         }
@@ -90,9 +90,9 @@ namespace App.Home.Controllers
         // POST: CrewTraining/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditCrewTraining(int id, /*[Bind("DirectorId,DirectorName,Designation,CompanyPost,Image,Details,FacebookLink,TwitterLink,LinkedInLink,IsDeleted,CreatedDate,CreatedBy,UpdatedDate,UpdatedBy,PhotoUpload")]*/ TblDirector tblCrewTraining/*, IFormCollection formValues*/)
+        public async Task<IActionResult> EditCrewTraining(int id,  TblCrewTraining tblCrewTraining/*, IFormCollection formValues*/)
         {
-            if (id != tblCrewTraining.DirectorId)
+            if (id != tblCrewTraining.CrewTrainingId)
             {
                 return NotFound();
             }
@@ -108,18 +108,18 @@ namespace App.Home.Controllers
                     var imagePath = "";
                     if (tblCrewTraining.PhotoUpload != null)
                     {
-                        imagePath = await _fileUploadService.UploadImageDirector(tblCrewTraining);
+                        imagePath = await _fileUploadService.UploadImageCrewTraining(tblCrewTraining);
                         tblCrewTraining.Image = imagePath;
+                        //tblCrewTraining = await _CrewTrainingService.UpdateCrewTraining(tblCrewTraining);
                     }
-                    //tblCrewTraining = await _CrewTrainingService.UpdateCrewTraining(tblCrewTraining);
-                    
-                    _context.Update(tblCrewTraining);
-                    await _context.SaveChangesAsync();
+                        _context.Update(tblCrewTraining);
+                        await _context.SaveChangesAsync();
 
+                    
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!TblCrewTrainingExists(tblCrewTraining.DirectorId))
+                    if (!TblCrewTrainingExists(tblCrewTraining.CrewTrainingId))
                     {
                         return NotFound();
                     }
@@ -128,13 +128,13 @@ namespace App.Home.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(CrewTrainingIndex));
             }
             return View(tblCrewTraining);
         }
 
         // GET: CrewTraining/Delete/5
-        public async Task<IActionResult> CrewTrainingDelete(int? id) 
+        public async Task<IActionResult> CrewTrainingDelete(int? id)
         {
             if (id == null)
             {
@@ -158,7 +158,7 @@ namespace App.Home.Controllers
 
         // POST: CrewTraining/Delete/5
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken] 
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> CrewTrainingDelete(int id)
         {
             var tblCrewTraining = await _context.TblCrewTrainings.FindAsync(id);
