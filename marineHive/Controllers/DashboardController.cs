@@ -26,11 +26,11 @@ namespace App.Home.Controllers
             //{
             //    ViewData["UserFirstName"] = _appUser.UserFirstName;
             //}
-           
+
             //    ViewData["UserRoleID"] = _appUser.UserRoleID;
-            
-            
-            ViewBag.TotalCompany = TotalCompany();
+
+           
+            //ViewBag.TotalCompany =  _dbContext.TblCompanies.Count(x => x.IsActive == true);
             return View();
         }
 

@@ -65,22 +65,29 @@ namespace App.Home.Controllers
         {
             if (ModelState.IsValid)
             {
-                
-                tblCompany.IsActive = true;
-                tblCompany.CreatedBy = HttpContext.Session.GetInt32("session_UserID");
-                tblCompany.CreatedDate = DateTime.Now;
+                try
+                {
+                    tblCompany.IsActive = true;
+                    tblCompany.CreatedBy = HttpContext.Session.GetInt32("session_UserID");
+                    tblCompany.CreatedDate = DateTime.Now;
 
-                TblUser tblUser = new TblUser();
-                tblUser.UserName = tblCompany.Email;
-                tblUser.UserPassword = tblCompany.Password;
-                _context.Add(tblUser);
-                await _context.SaveChangesAsync();
+                    TblUser tblUser = new TblUser();
+                    tblUser.UserName = tblCompany.Email ?? "";
+                    tblUser.UserPassword = tblCompany.Password;
+                    _context.Add(tblUser);
+                    await _context.SaveChangesAsync();
 
-                tblCompany.UserId = tblUser.UserId;
-                tblCompany.UserRoleId = 3; //3=Company - user role
-                _context.Add(tblCompany);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(CompanyIndex));
+                    tblCompany.UserId = tblUser.UserId;
+                    tblCompany.UserRoleId = 3; //3=Company - user role
+                    _context.Add(tblCompany);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(CompanyIndex));
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+               
             }
             return View(tblCompany);
         }

@@ -14,8 +14,8 @@ namespace App.DAL.Models
         public int UserRoleId { get; set; }
         public string UserName { get; set; } = null!;
         public string UserPassword { get; set; } = null!;
-        public bool IsActive { get; set; }
-        public bool IsConfirmed { get; set; }
+        public bool? IsActive { get; set; }
+        public bool? IsConfirmed { get; set; }
         public bool? IsDisabled { get; set; }
         public DateTime? LastLoginTime { get; set; }
         public DateTime? CreatedDate { get; set; }
