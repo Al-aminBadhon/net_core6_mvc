@@ -75,17 +75,23 @@ namespace App.Home.Controllers
             {
 
                 tblCompany.IsActive = true;
-                //tblCompany.CreatedBy = HttpContext.Session.GetInt32("session_UserID");
-                //tblCompany.CreatedDate = DateTime.Now;
+                tblCompany.CreatedBy = HttpContext.Session.GetInt32("session_UserID");
+                tblCompany.CreatedDate = DateTime.Now;
 
                 TblUser tblUser = new TblUser();
-                tblUser.UserName = tblCompany.Email;
-                tblUser.UserPassword = tblCompany.Password;
+                tblUser.UserName = tblCompany.Email ?? "";
+                tblUser.UserPassword = tblCompany.Password??"123456";
+                var userRoleID = _context.TblUserRoles.FirstOrDefault(x => x.UserRoleName == "Company").UserRoleId;
+                tblUser.UserRoleId = userRoleID;
+                tblUser.IsActive = true;
+                tblUser.IsConfirmed = true;
                 _context.Add(tblUser);
                 await _context.SaveChangesAsync();
 
                 tblCompany.UserId = tblUser.UserId;
-                tblCompany.UserRoleId = 2; // 2 = Crew -> user role
+                tblCompany.UserRoleId = userRoleID;
+                tblCompany.IsActive = true;
+                tblCompany.IsAprroved = true;
                 _context.Add(tblCompany);
                 await _context.SaveChangesAsync();
                 //return RedirectToAction(nameof(CrewIndex));
@@ -124,14 +130,14 @@ namespace App.Home.Controllers
 
                     if(data.UserRoleId == 1)
                     {
-                        var Fullname = _context.TblExecutives.Where(e => e.UserId == data.UserId).FirstOrDefault();
+                        var fullname = _context.TblExecutives.Where(e => e.UserId == data.UserId).FirstOrDefault();
 
                         //_appUser.UserFirstName = Fullname.ExFirstName;
-                        HttpContext.Session.SetString("session_UserFirstName", Fullname.ExFirstName);
+                        HttpContext.Session.SetString("session_UserFirstName", fullname.ExFirstName ?? "");
                     }
                     //_appUser.UserRoleID = data.UserRoleId;
                     //_appUser.UserID = data.UserId;
-                    //_appUser.UserName = tblUser.UserName;
+                    //_appUser.UserName = tblUser.UserName; 
 
                     HttpContext.Session.SetInt32("session_UserRoleID", data.UserRoleId);
                     HttpContext.Session.SetInt32("session_UserID", data.UserId);

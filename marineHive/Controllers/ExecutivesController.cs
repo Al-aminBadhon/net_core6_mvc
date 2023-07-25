@@ -12,6 +12,7 @@ using App.DAL.Utilities;
 using Microsoft.AspNetCore.Http;
 using System.Xml.Linq;
 using App.Home.FileUploadService;
+using Microsoft.EntityFrameworkCore.Internal;
 
 namespace App.Home.Controllers
 {
@@ -32,8 +33,40 @@ namespace App.Home.Controllers
         // GET: Executives
         public async Task<IActionResult> ExecutiveIndex()
         {
-            List<TblExecutive> model = await _context.TblExecutives.Where(x => x.IsActive != false).ToListAsync();
-            return View(model);
+            List<TblExecutive> tblExecutives = await (
+                                     from e in _context.TblExecutives
+                                     where e.IsActive != false
+                                     join u in _context.TblUsers on e.UserId equals u.UserId
+                                     select new TblExecutive
+                                     {
+                                         ExecutiveId = e.ExecutiveId,
+                                         UserId = e.UserId,
+                                         UserRoleId = e.UserRoleId,
+                                         ExFirstName = e.ExFirstName,
+                                         ExLastName = e.ExLastName,
+                                         Designation = e.Designation,
+                                         Image = e.Image,
+                                         Address = e.Address,
+                                         Phone1 = e.Phone1,
+                                         Phone2 = e.Phone2,
+                                         Email = e.Email,
+                                         IsActive = e.IsActive,
+                                         IsApproved = e.IsApproved,
+                                         PhotoUpload = e.PhotoUpload,
+                                         Usertype = e.Usertype,
+                                         Password = u.UserPassword
+                                     }
+                                 ).ToListAsync();
+
+            //string name = "Romana";
+
+            //var query = tblExecutives.AsQueryable();
+
+            //query = query.Where(a => a.ExFirstName.Contains(name));
+
+            //tblExecutives = new List<TblExecutive>(query); 
+
+            return View(tblExecutives);
         }
 
         // GET: Executives/Details/5
@@ -76,11 +109,18 @@ namespace App.Home.Controllers
         {
             if (ModelState.IsValid)
             {
-                ViewBag.ExistUser = true;
+
                 var allUsers = await _context.TblUsers.Where(x => x.UserName == tblExecutive.Email).ToListAsync();
-                if(allUsers.Count != 0)
+                if (allUsers.Count != 0)
                 {
-                    ViewBag.ExistUser = "Username - " + tblExecutive.Email + "already registered";
+                   
+                    ViewData["ExistUser"] = "Username - " + tblExecutive.Email + " already registered";
+                    List<string> Users = new List<string>()
+                    {
+                    "Super admin" , "Executive"
+
+                     };
+                    ViewBag.allUser = Users;
                     return View(tblExecutive);
                 }
 
@@ -90,14 +130,17 @@ namespace App.Home.Controllers
                 tblExecutive.CreatedDate = DateTime.Now;
 
                 TblUser tblUser = new TblUser();
-                tblUser.UserName = tblExecutive.Email;
+                tblUser.UserName = tblExecutive.Email.ToLower();
                 tblUser.UserPassword = tblExecutive.Password;
                 tblUser.IsActive = true;
                 tblUser.IsConfirmed = true;
-                tblUser.UserRoleId = 4;
+                //tblUser.UserRoleId = 4;
+
+                tblUser.CreatedBy = HttpContext.Session.GetInt32("session_UserID");
+                tblUser.CreatedDate = DateTime.Now;
                 if (tblExecutive.Usertype == "Super admin")
                 {
-                    tblUser.UserId = 1;
+                    tblUser.UserRoleId = 1;
                 }
                 //else if(tblExecutive.Usertype == "Crew")
                 //{
@@ -109,13 +152,15 @@ namespace App.Home.Controllers
                 //}
                 else if (tblExecutive.Usertype == "Executive")
                 {
-                    tblUser.UserId = 4;
+                    tblUser.UserRoleId = 4;
                 }
 
-
+                if(tblUser.UserRoleId == 0)
+                {
+                    tblUser.UserRoleId=4; //Executive
+                }
                 _context.Add(tblUser);
                 await _context.SaveChangesAsync();
-
 
                 var imagePath = "";
                 //_CrewTrainingService.CreateCrewTraining(tblCrewTraining);
@@ -125,7 +170,8 @@ namespace App.Home.Controllers
                     tblExecutive.Image = imagePath;
                 }
                 tblExecutive.UserId = tblUser.UserId;
-                tblExecutive.UserRoleId = 4; //4=executive - user role
+                tblExecutive.UserRoleId = tblUser.UserRoleId;
+                tblExecutive.Email = tblExecutive.Email.ToLower();
                 _context.Add(tblExecutive);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(ExecutiveIndex));
@@ -143,9 +189,24 @@ namespace App.Home.Controllers
 
             var tblExecutive = await _context.TblExecutives.FindAsync(id);
 
-            var user = await _context.TblUsers.FindAsync(id);
+            var user = await _context.TblUsers.FindAsync(tblExecutive.UserId);
             tblExecutive.Password = user.UserPassword;
+            if (tblExecutive.UserRoleId == 1)
+            {
+                tblExecutive.Usertype = "Super admin";
 
+            }
+            else if (tblExecutive.UserRoleId == 4)
+            {
+                tblExecutive.Usertype = "Executive";
+
+            }
+            List<string> allUsers = new List<string>()
+            {
+                "Super admin" , "Executive"
+
+            };
+            ViewBag.allUser = allUsers;
             if (tblExecutive == null)
             {
                 return NotFound();
@@ -158,7 +219,7 @@ namespace App.Home.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditExecutive(int id, /*[Bind("ExecutiveId,UserRoleId,UserId,ExFirstName,ExLastName,Designation,Image,Address,Phone1,Phone2,Email,IsActive,IsApproved,CreatedDate,CreatedBy,UpdatedDate,UpdatedBy")]*/ TblExecutive tblExecutive)
+        public async Task<IActionResult> EditExecutive(int id, TblExecutive tblExecutive)
         {
             if (id != tblExecutive.ExecutiveId)
             {
@@ -169,8 +230,37 @@ namespace App.Home.Controllers
             {
                 try
                 {
-                    tblExecutive.UpdatedBy = 1;
+                    TblUser tblUser = await _context.TblUsers.FindAsync(tblExecutive.UserId);
+                    tblUser.UserName = tblExecutive.Email.ToLower();
+                    tblUser.UserPassword = tblExecutive.Password;
+                    tblUser.UpdatedBy = HttpContext.Session.GetInt32("session_UserID");
+                    tblUser.UpdatedDate = DateTime.Now;
+                    if (tblExecutive.Usertype == "Super admin")
+                    {
+                        tblUser.UserRoleId = 1;
+                    }
+                    else if (tblExecutive.Usertype == "Executive")
+                    {
+                        tblUser.UserRoleId = 4;
+                    }
+
+                    _context.Update(tblUser);
+                    await _context.SaveChangesAsync();
+
+
+                    var imagePath = "";
+                    //_CrewTrainingService.CreateCrewTraining(tblCrewTraining);
+                    if (tblExecutive.PhotoUpload != null)
+                    {
+                        imagePath = await _fileUploadService.UploadImageExecutive(tblExecutive);
+                        tblExecutive.Image = imagePath;
+                    }
+
+
+                    tblExecutive.UpdatedBy = HttpContext.Session.GetInt32("session_UserID");
                     tblExecutive.UpdatedDate = DateTime.Now;
+                    tblExecutive.UserRoleId = tblUser.UserRoleId;
+
                     _context.Update(tblExecutive);
                     await _context.SaveChangesAsync();
                 }

@@ -98,7 +98,7 @@ function btnDelete(id) {
         .then((willDelete) => {
             if (willDelete) {
                 debugger;
-                DeletePhoto(id);
+                DeleteExecutives(id);
                 setTimeout(() => {
                     swal("Poof! Executive has been deleted!", {
                         icon: "success",
