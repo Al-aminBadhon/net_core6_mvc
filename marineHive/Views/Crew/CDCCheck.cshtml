@@ -8,17 +8,18 @@
 <main class="main">
     <section class="pt-100 login-register">
         <div class="container">
+
             <div class="row login-register-cover">
                 <div class="col-lg-4 col-md-6 col-sm-12 mx-auto">
                     <div class="text-center">
                         <p class="font-sm text-brand-2">Register </p>
                         <h2 class="mt-10 mb-5 text-brand-1">At first search you valid CDC Number</h2>
-                       
+
                     </div>
                     <form class="login-register text-start mt-20" method="post">
-                        <div class="">
+                        <div class="container" style="align-content:center">
                             <div class="form-group">
-                                <label class="form-label" for="input-1">Company Name *</label>
+                                <label class="form-label" for="input-1">Bangladeshi CDC Number</label>
                                 <input class="form-control" asp-for="Cdcnumber" id="Cdcnumber" type="text" required name="Cdcnumber" placeholder="BSC/0001">
                             </div>
                             @if (ViewBag.Msg != "")
@@ -30,16 +31,47 @@
                             <div class="form-group">
                                 <button class="btn btn-brand-1 hover-up w-100" type="submit" name="login">Search</button>
                             </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-9">
+                                        <p style="color:red; font-weight:bold">**If you have other CDC number then submit it by other CDC number not in Bangladeshi CDC number</p>
+                                    </div>
+                                    <div class="col-md-3">
 
+
+                                        <a class="btn btn-warning" asp-controller="Crew" asp-action="RegisterCrew">Other CDC</a>
+
+                                    </div>
+                                </div>
+                               
+                                <div class="img-1 d-none d-lg-block"><img class="shape-1" src="~/frontEnd/assets/imgs/page/login-register/img-1.svg" alt="JobBox"></div>
+                                <div class="img-2"><img src="~/frontEnd/assets/imgs/page/login-register/img-2.svg" alt="JobBox"></div>
+                            </div>
                         </div>
-
                     </form>
-                    
-
                 </div>
-                <div class="img-1 d-none d-lg-block"><img class="shape-1" src="~/frontEnd/assets/imgs/page/login-register/img-1.svg" alt="JobBox"></div>
-                <div class="img-2"><img src="~/frontEnd/assets/imgs/page/login-register/img-2.svg" alt="JobBox"></div>
+
+
             </div>
         </div>
     </section>
 </main>
+
+<script>
+    function otherCDC() {
+
+        var otherCDC = $('#OtherCdcnumber').val();
+        if (otherCDC == '') {
+            alert("please provide Other CDC Number");
+        }
+        else {
+            $.ajax({
+                type: "GET",
+                url: "@Url.Action("RegisterCrew", "Crew")",
+                data: { id: otherCDC },
+                contentType: 'json',
+            });
+        }
+    }
+
+</script>
