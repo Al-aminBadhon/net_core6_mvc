@@ -67,6 +67,7 @@ namespace App.Home.Controllers
         }
         [AllowAnonymous]
         [HttpPost]
+
         public IActionResult CDCCheck(TblCrew model)
         {
            
