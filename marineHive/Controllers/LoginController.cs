@@ -69,7 +69,7 @@ namespace App.Home.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> RegisterCompany( TblCompany tblCompany)
+        public async Task<IActionResult> RegisterCompany(TblCompany tblCompany)
         {
             if (ModelState.IsValid)
             {
@@ -80,7 +80,7 @@ namespace App.Home.Controllers
 
                 TblUser tblUser = new TblUser();
                 tblUser.UserName = tblCompany.Email ?? "";
-                tblUser.UserPassword = tblCompany.Password??"123456";
+                tblUser.UserPassword = tblCompany.Password ?? "123456";
                 var userRoleID = _context.TblUserRoles.FirstOrDefault(x => x.UserRoleName == "Company").UserRoleId;
                 tblUser.UserRoleId = userRoleID;
                 tblUser.IsActive = true;
@@ -100,6 +100,28 @@ namespace App.Home.Controllers
             }
             return View(tblCompany);
         }
+        public IActionResult RegisterCrew()
+        {
+            //ViewData["UserRoleId"] = new SelectList(_context.TblUserRoles, "UserRoleId", "UserRoleName");
+            return View();
+        }
+
+        // POST: Login/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> RegisterCrew(TblCrew tblCrew)
+        {
+            if (ModelState.IsValid)
+            {
+
+
+
+
+            }
+            return View();
+        }
 
         public IActionResult Login()
         {
@@ -116,48 +138,60 @@ namespace App.Home.Controllers
         {
             //if (ModelState.IsValid)
             //{
-                
 
-                var data = _context.TblUsers.Where(e => e.UserName == tblUser.UserName && tblUser.UserPassword == e.UserPassword).FirstOrDefault();
-                if (data != null)
+
+            var data = _context.TblUsers.Where(e => e.UserName == tblUser.UserName && tblUser.UserPassword == e.UserPassword).FirstOrDefault();
+            if (data != null)
+            {
+                var identity = new ClaimsIdentity(new[] { new Claim(ClaimTypes.Name, tblUser.UserName) },
+                    CookieAuthenticationDefaults.AuthenticationScheme);
+
+                var principal = new ClaimsPrincipal(identity);
+                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
+                //HttpContext.Session.SetString("Username", "");
+
+                HttpContext.Session.SetInt32("session_UserRoleID", data.UserRoleId);
+                HttpContext.Session.SetInt32("session_UserID", data.UserId);
+                HttpContext.Session.SetString("session_UserName", tblUser.UserName);
+                var roleName = _context.TblUserRoles.FirstOrDefault(x => x.UserRoleId == data.UserRoleId).UserRoleName ?? "";
+                if (!String.IsNullOrEmpty(returnUrl))
                 {
-                    var identity = new ClaimsIdentity(new[] { new Claim(ClaimTypes.Name, tblUser.UserName) },
-                        CookieAuthenticationDefaults.AuthenticationScheme);
-
-                    var principal = new ClaimsPrincipal(identity);
-                    await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
-                    //HttpContext.Session.SetString("Username", "");
-
-                    if(data.UserRoleId == 1)
-                    {
-                        var fullname = _context.TblExecutives.Where(e => e.UserId == data.UserId).FirstOrDefault();
-
-                        //_appUser.UserFirstName = Fullname.ExFirstName;
-                        HttpContext.Session.SetString("session_UserFirstName", fullname.ExFirstName ?? "");
-                    }
-                    //_appUser.UserRoleID = data.UserRoleId;
-                    //_appUser.UserID = data.UserId;
-                    //_appUser.UserName = tblUser.UserName; 
-
-                    HttpContext.Session.SetInt32("session_UserRoleID", data.UserRoleId);
-                    HttpContext.Session.SetInt32("session_UserID", data.UserId);
-                    HttpContext.Session.SetString("session_UserName", tblUser.UserName);
-
-
-
-                    var roleid = HttpContext.Session.GetInt32("session_UserRoleID");
-
-                    if (!String.IsNullOrEmpty(returnUrl))
-                    {
-                        return LocalRedirect(returnUrl);
-                    }
+                    return LocalRedirect(returnUrl);
+                }
+                if (roleName == "Admin")
+                {
+                    var admin = _context.TblExecutives.Where(e => e.UserId == data.UserId).FirstOrDefault();
+                    HttpContext.Session.SetString("session_UserFirstName", admin.ExFirstName ?? "");
                     return RedirectToAction("DashboardIndex", "DashBoard");
                 }
-                else
+                if (roleName == "Crew")
                 {
-                    ViewBag.ErrorMsg = "Username or password is incorrect";
-                    return View(tblUser);
+                    var crew = _context.TblCrews.Where(e => e.UserId == data.UserId).FirstOrDefault();
+                    HttpContext.Session.SetString("session_UserFirstName", crew.CrewFirstName ?? "");
+                    return RedirectToAction("DashboardIndex", "DashBoard");
                 }
+                if (roleName == "Company")
+                {
+                    var company = _context.TblCompanies.Where(e => e.UserId == data.UserId).FirstOrDefault();
+                    HttpContext.Session.SetString("session_UserFirstName", company.CompanyName ?? "");
+                    return RedirectToAction("CompanyIndex", "Company");
+                }
+                if (roleName == "Executive")
+                {
+                    var fullname = _context.TblExecutives.Where(e => e.UserId == data.UserId).FirstOrDefault();
+                    HttpContext.Session.SetString("session_UserFirstName", fullname.ExFirstName ?? "");
+                    return RedirectToAction("ExecutiveIndex", "Executive");
+                }
+
+               
+
+                
+            }
+            else
+            {
+                ViewBag.ErrorMsg = "Username or password is incorrect";
+                return View(tblUser);
+            }
             //}
             var errors = ModelState.Values.SelectMany(v => v.Errors);
 
