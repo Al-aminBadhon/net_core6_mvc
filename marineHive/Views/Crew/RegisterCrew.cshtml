@@ -1,0 +1,119 @@
+﻿@model App.DAL.Models.TblCrew
+
+@{
+    ViewData["Title"] = "Create";
+   
+}
+
+<main class="main">
+    <section class="pt-100 login-register">
+        <div class="container">
+            <div class="row login-register-cover">
+                <div class="col-lg-4 col-md-6 col-sm-12 mx-auto">
+                    <div class="text-center">
+                        <p class="font-sm text-brand-2">Register </p>
+                        <h2 class="mt-10 mb-5 text-brand-1">Start for free Today</h2>
+                        @*<p class="font-sm text-muted mb-30">Access to all features. No credit card required.</p>*@
+                        @*<button class="btn social-login hover-up mb-20"><img src="~/frontEnd/assets/imgs/template/icons/icon-google.svg" alt="jobbox"><strong>Sign up with Google</strong></button>*@
+                        @*<div class="divider-text-center"><span>Or continue with</span></div>*@
+                    </div>
+                    
+                    <form class="login-register text-start mt-20" method="post">
+                        <div class="">
+                            <div class="form-group">
+                                <label class="form-label" for="input-1">CDC Number</label>
+                                <input class="form-control" asp-for="Cdcnumber" id="Cdcnumber" type="text" required name="Cdcnumber" placeholder="Marine Hive LTD" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="input-1">First Name</label>
+                                <input class="form-control" asp-for="CrewFirstName" id="CrewFirstName" name="CrewFirstName" type="text" required  >
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="input-1">Last Name</label>
+                                <input class="form-control" asp-for="CrewLastName" id="CrewLastName" name="CrewLastName" type="text" required  >
+                            </div>
+                           
+                            <div class="form-group">
+                                <label class="form-label" for="input-1">Current Desgination</label>
+                                <input class="form-control" asp-for="CurrentDesgination" id="CurrentDesgination" name="CurrentDesgination" type="text" >
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="input-1">Career Objective</label>
+                                <textarea class="form-control" asp-for="CareerObjective" id="CareerObjective" name="CareerObjective" rows="4" required=""></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="input-1">Present Address</label>
+                                <textarea class="form-control" asp-for="PresentAddress" id="CareerObjective" name="CareerObjective" rows="4" required=""></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="input-1">Permanent Address</label>
+                                <textarea class="form-control" asp-for="PermanentAddress" id="CareerObjective" name="CareerObjective" rows="4" required=""></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="input-1">DOB</label>
+                                <input class="form-control" asp-for="DateOfBirth" id="DateOfBirth" type="text" required="" name="DateOfBirth" placeholder="Steven Job">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="input-2">Gender</label>
+                                <input class="form-control" asp-for="Gender" id="Gender" type="email" required="" name="Gender" placeholder="stevenjob@gmail.com">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="input-2">Email</label>
+                                <input class="form-control" asp-for="Email" id="Email" type="email" required="" name="Email" placeholder="stevenjob@gmail.com">
+                            </div>
+                            @if (ViewBag.EmailExist != "")
+                            {
+                                <span style="color:red; font-weight:bold">
+                                    @ViewBag.EmailExist
+                                </span>
+                            }
+                            @*<div class="form-group">
+                            <label class="form-label" for="input-3">Username *</label>
+                            <input class="form-control" id="input-3" type="text" required="" name="username" placeholder="stevenjob">
+                            </div>*@
+                            <div class="form-group">
+                                <label class="form-label" for="input-4">Password *</label>
+                                <input class="form-control" asp-for="Password" id="Password" type="password" required="" name="Password" placeholder="************">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="input-5">Re-Password *</label>
+                                <input class="form-control" id="Re-password" type="password" required="" name="Re-password" placeholder="************">
+                                <span id="message"></span>
+                            </div>
+                            @*<div class="login_footer form-group d-flex justify-content-between">
+                            <label class="cb-container">
+                            <input type="checkbox"><span class="text-small">Agree our terms and policy</span><span class="checkmark"></span>
+                            </label><a class="text-muted" href="page-contact.html">Lean more</a>
+                            </div>*@
+                            <div class="form-group">
+                                <button class="btn btn-brand-1 hover-up w-100" type="submit" name="login">Submit &amp; Register</button>
+                            </div>
+                            <div class="text-muted text-center">Already have an account? <a asp-action="Login" asp-controller="Login">Sign in</a></div>
+                        </div>
+
+                    </form>
+                </div>
+                <div class="img-1 d-none d-lg-block"><img class="shape-1" src="~/frontEnd/assets/imgs/page/login-register/img-1.svg" alt="JobBox"></div>
+                <div class="img-2"><img src="~/frontEnd/assets/imgs/page/login-register/img-2.svg" alt="JobBox"></div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<script>
+    $(document).ready(function () {
+        //var error = ViewBag.EmailExist;
+        //if (error != "") {
+        //    swal("already registered");
+        //}
+    });
+
+    $('#Password, #Re-password').on('keyup', function () {
+        if ($('#Password').val() == $('#Re-password').val()) {
+            $('#message').html('Matched').css('color', 'green');
+        } else
+            $('#message').html('Not Matching').css('color', 'red');
+    });
+
+
+</script>

@@ -51,8 +51,10 @@ namespace App.Home.Controllers
         //}
 
         // GET: Company/Create
-        public IActionResult CreateCompany()
+        [AllowAnonymous]
+        public IActionResult RegisterCompany()
         {
+            ViewBag.EmailExist = "";
             return View();
         }
 
@@ -61,31 +63,49 @@ namespace App.Home.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateCompany(TblCompany tblCompany)
+        [AllowAnonymous]
+
+        public async Task<IActionResult> RegisterCompany(TblCompany tblCompany)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
+                    var alreadyExistEmail = _context.TblCompanies.FirstOrDefault(x => x.Email == tblCompany.Email);
+                    ViewBag.EmailExist = "";
+                    if (alreadyExistEmail != null)
+                    {
+                        ViewBag.EmailExist = "This \""+ tblCompany.Email + "\" email address is already registered";
+                        return View(tblCompany);
+                        
+                    }
                     tblCompany.IsActive = true;
                     tblCompany.CreatedBy = HttpContext.Session.GetInt32("session_UserID");
                     tblCompany.CreatedDate = DateTime.Now;
 
                     TblUser tblUser = new TblUser();
                     tblUser.UserName = tblCompany.Email ?? "";
-                    tblUser.UserPassword = tblCompany.Password;
+                    tblUser.UserPassword = tblCompany.Password ?? "123456";
+                    var userRoleID = _context.TblUserRoles.FirstOrDefault(x => x.UserRoleName == "Company").UserRoleId;
+                    tblUser.UserRoleId = userRoleID;
+                    tblUser.IsActive = true;
+                    tblUser.IsConfirmed = true;
                     _context.Add(tblUser);
                     await _context.SaveChangesAsync();
 
                     tblCompany.UserId = tblUser.UserId;
-                    tblCompany.UserRoleId = 3; //3=Company - user role
+                    tblCompany.UserRoleId = userRoleID;
+                    tblCompany.IsActive = true;
+                    tblCompany.IsAprroved = true;
                     _context.Add(tblCompany);
                     await _context.SaveChangesAsync();
-                    return RedirectToAction(nameof(CompanyIndex));
+                    return RedirectToAction(nameof(CompanyIndex), new { id = tblCompany.CompanyId});
+
                 }
                 catch (Exception ex)
                 {
-                    throw ex;
+                    var error = ex;
+                    throw error;
                 }
                
             }
