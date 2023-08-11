@@ -11,7 +11,7 @@ namespace App.DAL.Models
         public int UserRoleId { get; set; }
         public int UserId { get; set; }
         public string Cdcnumber { get; set; } = null!;
-        public bool? IsOtherCdc { get; set; }
+        public bool IsOtherCdc { get; set; }
         public string? OtherCdcnumber { get; set; }
         public string CrewFirstName { get; set; } = null!;
         public string? CrewLastName { get; set; }
