@@ -9,7 +9,7 @@
     <section class="pt-100 login-register">
         <div class="container">
             <div class="row login-register-cover">
-                <div class="col-lg-4 col-md-6 col-sm-12 mx-auto">
+                <div class="col-lg-8 col-md-6 col-sm-12 mx-auto">
                     <div class="text-center">
                         <p class="font-sm text-brand-2">Register </p>
                         <h2 class="mt-10 mb-5 text-brand-1">Start for free Today</h2>
@@ -17,10 +17,11 @@
                         @*<button class="btn social-login hover-up mb-20"><img src="~/frontEnd/assets/imgs/template/icons/icon-google.svg" alt="jobbox"><strong>Sign up with Google</strong></button>*@
                         @*<div class="divider-text-center"><span>Or continue with</span></div>*@
                     </div>
-                    
+                    <input asp-for="IsOtherCdc" type="hidden" id="IsOtherCdc" name="IsOtherCdc" value="@Model.IsOtherCdc">
+
                     <form class="login-register text-start mt-20" method="post">
                         <div class="">
-                            @if(Model.Cdcnumber != null)
+                            @if(Model.Cdcnumber != "")
                             {
                                 <div class="form-group">
                                     <label class="form-label" for="input-1">CDC Number</label>
@@ -30,14 +31,17 @@
                             else
                             {
                                 <div class="form-group">
-                                    <label class="form-label" for="input-1">CDC Number</label>
-                                    <input class="form-control" asp-for="Cdcnumber" id="Cdcnumber" type="text" required name="Cdcnumber" >
+                                    <label class="form-label" for="input-1">Other CDC Number</label>
+                                    <input class="form-control" asp-for="OtherCdcnumber" id="OtherCdcnumber" type="text" required name="OtherCdcnumber">
+                                    @*<span asp-validation-for="Cdcnumber" class="text-danger"></span>*@
+
                                 </div>
                             }
 
                             <div class="form-group">
                                 <label class="form-label" for="input-1">First Name</label>
-                                <input class="form-control" asp-for="CrewFirstName" id="CrewFirstName" name="CrewFirstName" type="text" required  >
+                                <input class="form-control" asp-for="CrewFirstName" id="CrewFirstName" name="CrewFirstName" type="text" required>
+                                <span asp-validation-for="CrewFirstName" class="text-danger"></span>
                             </div>
                             <div class="form-group">
                                 <label class="form-label" for="input-1">Last Name</label>
@@ -54,11 +58,11 @@
                             </div>
                             <div class="form-group">
                                 <label class="form-label" for="input-1">Present Address</label>
-                                <textarea class="form-control" asp-for="PresentAddress" id="CareerObjective" name="CareerObjective" rows="4" required=""></textarea>
+                                <textarea class="form-control" asp-for="PresentAddress" id="PresentAddress" name="PresentAddress" rows="4" required=""></textarea>
                             </div>
                             <div class="form-group">
                                 <label class="form-label" for="input-1">Permanent Address</label>
-                                <textarea class="form-control" asp-for="PermanentAddress" id="CareerObjective" name="CareerObjective" rows="4" required=""></textarea>
+                                <textarea class="form-control" asp-for="PermanentAddress" id="PermanentAddress" name="PermanentAddress" rows="4" required=""></textarea>
                             </div>
                             <div class="form-group">
                                 <label class="form-label" for="input-1">DOB</label>
@@ -66,7 +70,7 @@
                             </div>
                             <div class="form-group">
                                 <label class="form-label" for="input-2">Gender</label>
-                                <input class="form-control" asp-for="Gender" id="Gender" type="email" required="" name="Gender" placeholder="stevenjob@gmail.com">
+                                <input class="form-control" asp-for="Gender" id="Gender" type="text" required="" name="Gender" placeholder="stevenjob@gmail.com">
                             </div>
                             <div class="form-group">
                                 <label class="form-label" for="input-2">Email</label>
@@ -104,7 +108,7 @@
 
                     </form>
                 </div>
-                <div class="img-1 d-none d-lg-block"><img class="shape-1" src="~/frontEnd/assets/imgs/page/login-register/img-1.svg" alt="JobBox"></div>
+                @*<div class="img-1 d-none d-lg-block"><img class="shape-1" src="~/frontEnd/assets/imgs/page/login-register/img-1.svg" alt="JobBox"></div>*@
                 <div class="img-2"><img src="~/frontEnd/assets/imgs/page/login-register/img-2.svg" alt="JobBox"></div>
             </div>
         </div>

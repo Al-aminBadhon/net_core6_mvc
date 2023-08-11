@@ -132,12 +132,21 @@ namespace App.Home.Controllers
             return childNodes;
         }
         [AllowAnonymous]
-        public IActionResult RegisterCrew(string cdcNumber)
+        public IActionResult RegisterCrew(string cdcNumber="")
         {
             TblCrew tblcrew = new TblCrew()
             {
                 Cdcnumber = cdcNumber,
             };
+            if(cdcNumber == "")
+            {
+                tblcrew.IsOtherCdc = true;
+            }
+            else
+            {
+                tblcrew.IsOtherCdc = false;
+
+            }
             return View(tblcrew);
         }
        
