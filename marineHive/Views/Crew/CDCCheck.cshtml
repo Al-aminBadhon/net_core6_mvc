@@ -2,18 +2,38 @@
 
 @{
     ViewData["Title"] = "Crew CDC Check";
+    Layout = "";
 
 }
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="msapplication-TileColor" content="#0E0E0E">
+    <meta name="template-color" content="#0E0E0E">
+    @*<link rel="manifest" href="manifest.json" crossorigin>*@
+    <meta name="msapplication-config" content="browserconfig.xml">
+    <meta name="description" content="Index page">
+    <meta name="keywords" content="index, page">
+    <meta name="author" content="">
+    <script src="~/frontend/assets/js/vendor/jquery-3.6.0.min.js"></script>
+
+    <link rel="shortcut icon" type="image/x-icon" href="~/frontend/assets/imgs/template/favicon.svg">
+    <link href="~/frontend/assets/css/style.css?version=4.1" rel="stylesheet">
+    <link href="~/customcss.css" rel="stylesheet" />
+
+    <title>@ViewData["Title"] | MARINE HIVE LTD </title>
+</head>
 
 <main class="main">
     <section class="pt-100 login-register">
         <div class="container">
 
             <div class="row login-register-cover">
-                <div class="col-lg-4 col-md-6 col-sm-12 mx-auto">
+                <div class="col-lg-8 col-md-10 col-sm-12 mx-auto">
                     <div class="text-center">
                         <p class="font-sm text-brand-2">Register </p>
-                        <h2 class="mt-10 mb-5 text-brand-1">At first search you valid CDC Number</h2>
+                        <h2 class="mt-10 mb-5 text-brand-1">At first search your valid CDC Number</h2>
 
                     </div>
                     <form class="login-register text-start mt-20" method="post">
@@ -43,8 +63,8 @@
 
                                     </div>
                                 </div>
-                               
-                                <div class="img-1 d-none d-lg-block"><img class="shape-1" src="~/frontEnd/assets/imgs/page/login-register/img-1.svg" alt="JobBox"></div>
+
+                                @*<div class="img-1 d-none d-lg-block"><img class="shape-1" src="~/frontEnd/assets/imgs/page/login-register/img-1.svg" alt="JobBox"></div>*@
                                 <div class="img-2"><img src="~/frontEnd/assets/imgs/page/login-register/img-2.svg" alt="JobBox"></div>
                             </div>
                         </div>
@@ -75,3 +95,19 @@
     }
 
 </script>
+
+
+<script src="~/frontend/assets/js/vendor/modernizr-3.6.0.min.js"></script>
+<script src="~/frontend/assets/js/vendor/jquery-3.6.0.min.js"></script>
+<script src="~/frontend/assets/js/vendor/jquery-migrate-3.3.0.min.js"></script>
+<script src="~/frontend/assets/js/vendor/bootstrap.bundle.min.js"></script>
+<script src="~/frontend/assets/js/plugins/waypoints.js"></script>
+<script src="~/frontend/assets/js/plugins/wow.js"></script>
+<script src="~/frontend/assets/js/plugins/magnific-popup.js"></script>
+<script src="~/frontend/assets/js/plugins/perfect-scrollbar.min.js"></script>
+<script src="~/frontend/assets/js/plugins/select2.min.js"></script>
+<script src="~/frontend/assets/js/plugins/isotope.js"></script>
+<script src="~/frontend/assets/js/plugins/scrollup.js"></script>
+<script src="~/frontend/assets/js/plugins/swiper-bundle.min.js"></script>
+<script src="~/frontend/assets/js/plugins/counterup.js"></script>
+<script src="~/frontend/assets/js/main.js?v=4.1"></script>
