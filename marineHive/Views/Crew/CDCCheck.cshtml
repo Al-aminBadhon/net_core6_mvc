@@ -39,22 +39,27 @@
                     <form class="login-register text-start mt-20" method="post">
                         <div class="container" style="align-content:center">
                             <div class="form-group">
-                                <label class="form-label" for="input-1">Bangladeshi CDC Number</label>
-                                <input class="form-control" asp-for="Cdcnumber" id="Cdcnumber" type="text" required name="Cdcnumber" placeholder="BSC/0001">
+                                @if (ViewBag.Msg != "")
+                                {
+                                    <span style="color:red; font-weight:bold">
+                                        @ViewBag.Msg
+                                    </span>
+                                }
                             </div>
-                            @if (ViewBag.Msg != "")
-                            {
-                                <span style="color:red; font-weight:bold">
-                                    @ViewBag.Msg
-                                </span>
-                            }
+                            <div class="form-group">
+                               
+                                <label class="form-label" for="input-1">Bangladeshi CDC Number</label>
+                                <input class="form-control" asp-for="Cdcnumber" id="Cdcnumber" type="text" required name="Cdcnumber" placeholder="Example - BSC/0001">
+                            </div>
+                            
                             <div class="form-group">
                                 <button class="btn btn-brand-1 hover-up w-100" type="submit" name="login">Search</button>
                             </div>
                             <div class="form-group">
                                 <div class="row">
                                     <div class="col-md-9">
-                                        <p style="color:red; font-weight:bold">**If you have other CDC number then submit it by other CDC number not in Bangladeshi CDC number</p>
+                                       
+                                        <p class="mt-10 mb-5 text-brand-1" style="font-weight:bold">**If you have other CDC number then submit it by other CDC number not in Bangladeshi CDC number</p>
                                     </div>
                                     <div class="col-md-3">
 

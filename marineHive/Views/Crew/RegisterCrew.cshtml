@@ -18,7 +18,13 @@
                         @*<div class="divider-text-center"><span>Or continue with</span></div>*@
                     </div>
                     <input asp-for="IsOtherCdc" type="hidden" id="IsOtherCdc" name="IsOtherCdc" value="@Model.IsOtherCdc">
-
+                    @if (ViewBag.RequiredMsg != null || ViewBag.RequiredMsg != "")
+                    {
+                        <span style="color:red; font-weight:bold">
+                            @ViewBag.RequiredMsg
+                        </span>
+                    }
+                    
                     <form class="login-register text-start mt-20" method="post">
                         <div class="">
                             @if(Model.Cdcnumber != "")
@@ -52,25 +58,26 @@
                                 <label class="form-label" for="input-1">Current Desgination</label>
                                 <input class="form-control" asp-for="CurrentDesgination" id="CurrentDesgination" name="CurrentDesgination" type="text" >
                             </div>
-                            <div class="form-group">
+                           @* <div class="form-group">
                                 <label class="form-label" for="input-1">Career Objective</label>
                                 <textarea class="form-control" asp-for="CareerObjective" id="CareerObjective" name="CareerObjective" rows="4" required=""></textarea>
-                            </div>
-                            <div class="form-group">
+                            </div>*@
+                            @*<div class="form-group">
                                 <label class="form-label" for="input-1">Present Address</label>
                                 <textarea class="form-control" asp-for="PresentAddress" id="PresentAddress" name="PresentAddress" rows="4" required=""></textarea>
                             </div>
                             <div class="form-group">
                                 <label class="form-label" for="input-1">Permanent Address</label>
                                 <textarea class="form-control" asp-for="PermanentAddress" id="PermanentAddress" name="PermanentAddress" rows="4" required=""></textarea>
-                            </div>
+                            </div>*@
                             <div class="form-group">
                                 <label class="form-label" for="input-1">DOB</label>
-                                <input class="form-control" asp-for="DateOfBirth" id="DateOfBirth" type="text" required="" name="DateOfBirth" placeholder="Steven Job">
+                                <input class="form-control" asp-for="DateOfBirth" id="DateOfBirth" type="date" required="" name="DateOfBirth" value="@DateTime.Today" >
                             </div>
                             <div class="form-group">
                                 <label class="form-label" for="input-2">Gender</label>
-                                <input class="form-control" asp-for="Gender" id="Gender" type="text" required="" name="Gender" placeholder="stevenjob@gmail.com">
+                                @*<input class="form-control" asp-for="Gender" id="Gender" type="text" required="" name="Gender" >*@
+                                <select name="Gender" class="form-control" asp-items="@ViewBag.GenderList" ></select>
                             </div>
                             <div class="form-group">
                                 <label class="form-label" for="input-2">Email</label>
@@ -121,6 +128,16 @@
         //if (error != "") {
         //    swal("already registered");
         //}
+        // Get the current date and format it as yyyy-mm-dd
+        var today = new Date().toISOString().split('T')[0];
+
+        // Set the initial value of the date picker to today's date
+        document.addEventListener('DOMContentLoaded', function () {
+            var dateOfBirthInput = document.getElementById('DateOfBirth');
+            if (dateOfBirthInput) {
+                dateOfBirthInput.value = today;
+            }
+        });
     });
 
     $('#Password, #Re-password').on('keyup', function () {
@@ -129,6 +146,8 @@
         } else
             $('#message').html('Not Matching').css('color', 'red');
     });
-
+    $(function () {
+        
+    });
 
 </script>

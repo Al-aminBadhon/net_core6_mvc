@@ -70,9 +70,9 @@ namespace App.Home.Controllers
 
         public IActionResult CDCCheck(TblCrew model)
         {
-           
-           var alreadyRegCDC = _context.TblCrews.FirstOrDefault(x => x.IsActive != false && x.Cdcnumber == model.Cdcnumber);
-            if(alreadyRegCDC == null)
+
+            var alreadyRegCDC = _context.TblCrews.FirstOrDefault(x => x.IsActive != false && x.Cdcnumber == model.Cdcnumber);
+            if (alreadyRegCDC == null)
             {
                 var urlLast = model.Cdcnumber.ToUpper().Replace("/", "%2F");
                 var web = new HtmlWeb();
@@ -90,17 +90,17 @@ namespace App.Home.Controllers
                         HtmlNode thNode = row.SelectSingleNode($"th[text()='{desiredThValue}']");
                         var cdc = row.SelectSingleNode("td").InnerText;
 
-                        if(cdc.ToLower() == model.Cdcnumber.ToLower())
+                        if (cdc.ToLower() == model.Cdcnumber.ToLower())
                         {
                             return RedirectToAction(nameof(RegisterCrew), new { model.Cdcnumber });
                         }
                         else
                         {
-                            
+
                         }
                     }
 
-                    
+
                 }
                 else
                 {
@@ -131,14 +131,15 @@ namespace App.Home.Controllers
 
             return childNodes;
         }
+        [HttpGet]
         [AllowAnonymous]
-        public IActionResult RegisterCrew(string cdcNumber="")
+        public IActionResult RegisterCrew(string cdcNumber = "")
         {
             TblCrew tblcrew = new TblCrew()
             {
                 Cdcnumber = cdcNumber,
             };
-            if(cdcNumber == "")
+            if (cdcNumber == "")
             {
                 tblcrew.IsOtherCdc = true;
             }
@@ -147,9 +148,19 @@ namespace App.Home.Controllers
                 tblcrew.IsOtherCdc = false;
 
             }
+
+            List<SelectListItem> GenderList = new()
+            {
+                new SelectListItem { Value = "0", Text = "-Select-" },
+                new SelectListItem { Value = "1", Text = "Male" },
+                new SelectListItem { Value = "2", Text = "FeMale" },
+                new SelectListItem { Value = "3", Text = "Other" }
+            };
+            ViewBag.GenderList = GenderList;
+
             return View(tblcrew);
         }
-       
+
         // POST: Crew/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -163,7 +174,24 @@ namespace App.Home.Controllers
             {
                 try
                 {
+                    if (tblCrew.Gender == "0")
+                    {
+                        List<SelectListItem> GenderList = new()
+                        {
+                            new SelectListItem { Value = "0", Text = "-Select-" },
+                            new SelectListItem { Value = "1", Text = "Male" },
+                            new SelectListItem { Value = "2", Text = "FeMale" },
+                            new SelectListItem { Value = "3", Text = "Other" }
+                        };
+                        ViewBag.GenderList = GenderList;
+                        ViewBag.RequiredMsg = "Select Gender please";
+                        return View(tblCrew);
 
+                    }
+                    tblCrew.CreatedBy = 0;
+                    tblCrew.CreatedDate = DateTime.Now;
+                    _context.Update(tblCrew);
+                    await _context.SaveChangesAsync();
 
                 }
                 catch (Exception ex)
@@ -173,6 +201,7 @@ namespace App.Home.Controllers
                 }
 
             }
+
             return View(tblCrew);
         }
 

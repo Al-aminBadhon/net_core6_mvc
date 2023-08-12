@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace App.DAL.Models
@@ -18,8 +19,9 @@ namespace App.DAL.Models
         public string? CareerObjective { get; set; }
         public string? PresentAddress { get; set; }
         public string? PermanentAddress { get; set; }
+        [DataType(DataType.Date)]
         public DateTime DateOfBirth { get; set; }
-        public string Gender { get; set; } = null!;
+        public string? Gender { get; set; } = null!;
         public string? Phone1 { get; set; }
         public string? Phone2 { get; set; }
         public string? Email { get; set; }
@@ -42,8 +44,8 @@ namespace App.DAL.Models
         public int? UpdatedBy { get; set; }
 
         [NotMapped]
-        public IFormFile PhotoUpload { get; set; }
+        public IFormFile? PhotoUpload { get; set; }
         [NotMapped]
-        public string Password { get; set; }
+        public string? Password { get; set; }
     }
 }
